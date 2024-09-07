@@ -74,3 +74,4 @@ crashlytics-build.properties
 
 # System generated or other auto-generated files
 .DS_Store
+.vscode/
