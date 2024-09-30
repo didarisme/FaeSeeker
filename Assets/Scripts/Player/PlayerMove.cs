@@ -7,6 +7,7 @@ public class PlayerMove : MonoBehaviour
     private bool IsSprinting => canSprint && !isCrouching && currentInput.magnitude != 0 && Input.GetKey(sprintKey);
     private bool ShouldJump => Input.GetKeyDown(jumpKey) && !isCrouching && isGrounded;
     private bool ShouldCrouch => Input.GetKeyDown(crouchKey) && !duringCrouchAnimation && isGrounded;
+    private bool isClimbingLadder;
 
     [Header("Functional Options")]
     [SerializeField] private bool canSprint = true;
@@ -53,6 +54,8 @@ public class PlayerMove : MonoBehaviour
     private Vector3 moveDirection;
     private Vector3 slideDirection;
     private Vector2 currentInput;
+    public Vector2 CurrentInput { get => currentInput; }
+    private float targetRotation;
 
     private bool isSliding
     {
@@ -70,7 +73,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    public event Action<Vector2, bool> OnMovement;
+    public event Action<Vector2, float, bool> OnMovement;
     public event Action OnStateChange;
 
     private MovementState state;
@@ -86,6 +89,7 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+
     }
 
     private void Start()
@@ -111,6 +115,9 @@ public class PlayerMove : MonoBehaviour
     private void HandleMovementInput()
     {
         currentInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        if (!isClimbingLadder)
+            targetRotation = Mathf.Atan2(currentInput.x, currentInput.y) * Mathf.Rad2Deg;
 
         float currentSpeed = new Vector2(characterController.velocity.x, characterController.velocity.z).magnitude;
         float targetSpeed = isCrouching ? crouchSpeed : IsSprinting ? sprintSpeed : walkSpeed;
@@ -165,6 +172,62 @@ public class PlayerMove : MonoBehaviour
 
     private void ApplyFinalMovements()
     {
+        Vector3 tagetDirection = Quaternion.Euler(0, targetRotation, 0) * Vector3.forward;
+
+        if (!isClimbingLadder)
+        {
+            if (Physics.Raycast(transform.position + Vector3.up * 0.1f, tagetDirection, out RaycastHit raycastHit, 0.5f))
+            {
+                if (raycastHit.transform.TryGetComponent(out Ladder ladder))
+                {
+                    GrabLadder();
+                }
+            }
+        }
+        else
+        {
+            if (Physics.Raycast(transform.position + Vector3.up * 0.1f, tagetDirection, out RaycastHit raycastHit, 0.5f))
+            {
+                if (!raycastHit.transform.TryGetComponent(out Ladder ladder))
+                {
+                    DropLadder();
+                    moveDirection.y = 3.5f;
+                }
+            }
+            else
+            {
+                DropLadder();
+                moveDirection.y = 3.5f;
+            }
+
+            if (moveDirection.y < 0)
+            {
+                if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit floorRaycastHit, 0.1f))
+                {
+                    DropLadder();
+                }
+            }
+        }
+
+        if (isClimbingLadder)
+        {
+            if (Mathf.Abs(targetRotation) > 45f)
+            {
+                if (targetRotation < 0) moveDirection.x *= -1f;
+
+                moveDirection.y = moveDirection.x;
+            }
+            else
+            {
+                moveDirection.y = moveDirection.z;
+            }
+
+            moveDirection.x = 0;
+            moveDirection.z = 0;
+
+            isGrounded = true;
+        }
+
         if (!isGrounded)
             moveDirection.y -= gravity * Time.deltaTime;
 
@@ -177,10 +240,20 @@ public class PlayerMove : MonoBehaviour
         {
             moveDirection.y = -4f;
             slideDirection = Vector3.zero;
-        } //FIX: when on slope change moveDirection
+        }
 
-        OnMovement?.Invoke(currentInput * speed, isGrounded);
+        OnMovement?.Invoke(currentInput * speed, targetRotation, isGrounded);
         characterController.Move(Time.deltaTime * moveDirection);
+    }
+
+    private void GrabLadder()
+    {
+        isClimbingLadder = true;
+    }
+
+    private void DropLadder()
+    {
+        isClimbingLadder = false;
     }
 
     private IEnumerator CrouchStand()

@@ -26,11 +26,10 @@ public class PlayerAnimation : MonoBehaviour
         playerMove.OnStateChange -= ChangeAnimationState;
     }
 
-    private void ApplyAnimtaions(Vector2 currentInput, bool isGrounded)
+    private void ApplyAnimtaions(Vector2 currentInput, float targetRotation, bool isGrounded)
     {
         if (currentInput != Vector2.zero)
         {
-            float targetRotation = Mathf.Atan2(currentInput.x, currentInput.y) * Mathf.Rad2Deg;
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref rotationVelocity, rotationSmoothTime);
 
             transform.rotation = Quaternion.Euler(0, rotation, 0);
