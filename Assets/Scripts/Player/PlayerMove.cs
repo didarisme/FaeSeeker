@@ -116,9 +116,6 @@ public class PlayerMove : MonoBehaviour
     {
         currentInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        if (!isClimbingLadder)
-            targetRotation = Mathf.Atan2(currentInput.x, currentInput.y) * Mathf.Rad2Deg;
-
         float currentSpeed = new Vector2(characterController.velocity.x, characterController.velocity.z).magnitude;
         float targetSpeed = isCrouching ? crouchSpeed : IsSprinting ? sprintSpeed : walkSpeed;
 
@@ -136,8 +133,13 @@ public class PlayerMove : MonoBehaviour
             speed = targetSpeed;
         }
 
+        Vector3 transformedInput = (currentInput.y * transform.TransformDirection(Vector3.forward)) + (currentInput.x * transform.TransformDirection(Vector3.right));
+
+        if (!isClimbingLadder)
+            targetRotation = Mathf.Atan2(transformedInput.x, transformedInput.z) * Mathf.Rad2Deg;
+
         float moveDirectionY = moveDirection.y;
-        moveDirection = ((currentInput.y * transform.TransformDirection(Vector3.forward)) + (currentInput.x * transform.TransformDirection(Vector3.right))) * speed;
+        moveDirection = transformedInput * speed;
         moveDirection.y = moveDirectionY;
     }
 
@@ -170,7 +172,7 @@ public class PlayerMove : MonoBehaviour
             StartCoroutine(CrouchStand());
     }
 
-    private void ApplyFinalMovements()
+    private void HandleClimbing()
     {
         Vector3 tagetDirection = Quaternion.Euler(0, targetRotation, 0) * Vector3.forward;
 
@@ -227,6 +229,11 @@ public class PlayerMove : MonoBehaviour
 
             isGrounded = true;
         }
+    }
+
+    private void ApplyFinalMovements()
+    {
+        HandleClimbing();
 
         if (!isGrounded)
             moveDirection.y -= gravity * Time.deltaTime;

@@ -12,6 +12,7 @@ public class SearchState : BaseState
         enemy.EnemyAnimator.SetBool("isPatrolling", true);
         enemy.Agent.SetDestination(enemy.LastKnowPos);
         enemy.Agent.speed = enemy.patrolSpeed;
+
         moveTimer = Random.Range(1, 5);
         searchTimer = Random.Range(20, 45);
     }
@@ -25,6 +26,7 @@ public class SearchState : BaseState
 
         if (enemy.Agent.remainingDistance < enemy.Agent.stoppingDistance)
         {
+
             moveTimeElapsed += Time.deltaTime;
 
             enemy.EnemyAnimator.SetBool("isPatrolling", false);
@@ -32,7 +34,6 @@ public class SearchState : BaseState
             if (moveTimeElapsed > moveTimer)
             {
                 enemy.EnemyAnimator.SetBool("isPatrolling", true);
-                Debug.Log("new point");
                 enemy.Agent.SetDestination(enemy.transform.position + (Random.insideUnitSphere * 10f));
                 moveTimer = Random.Range(1, 5);
                 moveTimeElapsed = 0;

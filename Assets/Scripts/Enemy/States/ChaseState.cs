@@ -24,11 +24,12 @@ public class ChaseState : BaseState
         {
             enemy.LastKnowPos = enemy.Player.position;
             stateMachine.ChangeState(new SearchState());
+            enemy.EnemyAnimator.SetBool("isChasing", false);
         }
     }
 
     public override void Exit()
     {
-        enemy.EnemyAnimator.SetBool("isChasing", false);
+        //enemy.EnemyAnimator.SetBool("isChasing", false);
     }
 }
