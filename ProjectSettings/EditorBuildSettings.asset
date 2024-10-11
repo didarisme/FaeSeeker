@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Level/Scenes/MenuFolder/MainMenu.unity
     guid: 16f8f4a4534481349b013d1fbf1b5d51
   - enabled: 1
-    path: Assets/Scenes/Backrooms.unity
+    path: Assets/Level/Scenes/BackroomsFolder/Backrooms.unity
     guid: 467da3565b9e849449aa00315598fa8f
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Level/Scenes/MenuFolder/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Test Scenes/Nice Trees.unity
+    path: Assets/Level/Scenes/NiceTreesFolder/Nice Trees.unity
     guid: 6460ba7565c7f74469ee3691cdcc6281
   m_configObjects: {}
