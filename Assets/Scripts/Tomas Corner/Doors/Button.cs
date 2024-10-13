@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Locomotion : MonoBehaviour
+public class Button : MonoBehaviour
 {
-    
     // Start is called before the first frame update
     void Start()
     {

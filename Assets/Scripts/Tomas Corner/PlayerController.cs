@@ -11,7 +11,6 @@ Use Case: Recieve input, and affect the activePawn.
 */
 public class PlayerController : MonoBehaviour
 {
-    public IPawn activePawn;
     public PlayerInputHandler inputHandler;
     private void Start(){
         if(inputHandler == null){
@@ -26,7 +25,4 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement(){
         
     }
-
-    
-    
 } 
