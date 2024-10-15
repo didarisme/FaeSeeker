@@ -4,54 +4,47 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public bool key = true;
-    public float openSpeed = 2.0f; // Speed of opening
-    public float closeSpeed = 2.0f; // Speed of closing
-    public Transform openPosition; // Position when the door is open
-    public Transform closedPosition; // Position when the door is closed
-
+    public bool state = true;
+    public float moveTime = 2f;
+    public Transform openTransform; // Position when the door is open
+    public Transform closedTransform; // Position when the door is closed
     private Coroutine currentCoroutine;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (currentCoroutine != null)
-            {
-                StopCoroutine(currentCoroutine);
-            }
-            currentCoroutine = StartCoroutine(Open());
+    bool ready = true;
+    
+    private void Update(){
+        if(Input.GetKeyDown(KeyCode.O)){
+            Open();
         }
-        if (Input.GetKeyUp(KeyCode.F))
-        {
-            if (currentCoroutine != null)
-            {
-                StopCoroutine(currentCoroutine);
-            }
-            currentCoroutine = StartCoroutine(Close());
+        if(Input.GetKeyDown(KeyCode.C)){
+            Close();
+        }
+    }
+    public void Open(){
+        if(ready){
+            currentCoroutine = StartCoroutine(Move(openTransform.position));
         }
     }
 
-    private IEnumerator Open()
-    {
-        Vector3 targetPosition = openPosition.position;
-        while (Vector3.Distance(transform.localPosition, targetPosition) > 0.01f)
-        {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * openSpeed);
-            yield return null;
+    public void Close(){
+        if(ready){
+            currentCoroutine = StartCoroutine(Move(closedTransform.position));
         }
-        transform.localPosition = targetPosition;
+        
     }
-
-    private IEnumerator Close()
+    private IEnumerator Move(Vector3 targetPosition)
     {
-        Vector3 targetPosition = closedPosition.position;
-        while (Vector3.Distance(transform.localPosition, targetPosition) > 0.01f)
+        Vector3 startPosition = transform.position;
+        ready = false;
+        float timeElapsed = 0f;
+        while (timeElapsed < moveTime)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * closeSpeed);
+            timeElapsed += Time.deltaTime;
+            transform.position = Vector3.Lerp(startPosition, targetPosition, timeElapsed/moveTime);
             yield return null;
         }
-        transform.localPosition = targetPosition;
+
+        ready = true;
     }
 
 }
