@@ -7,7 +7,10 @@ public class CameraFollow : MonoBehaviour
     public Transform target;
     public Vector3 offset = new Vector3(0, 10, -10);
     public float smoothTime = 0.25f;
-    public float rotationSpeed = 100.0f; // Speed of rotatio
+    public float rotationSpeed = 100.0f; // Speed of rotation
+    public float zoomSpeed = 2.0f; // Speed of zooming
+    public float minZoom = 5.0f; // Minimum zoom distance
+    public float maxZoom = 10.0f; // Maximum zoom distance
 
     private Vector3 currentVelocity;
     private float yaw;
@@ -22,6 +25,15 @@ public class CameraFollow : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             yaw += rotationSpeed * Time.deltaTime;
+        }
+
+        // Capture input for zoom
+        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+        offset = offset * (1 - scrollInput * zoomSpeed);
+        offset = Vector3.ClampMagnitude(offset, maxZoom);
+        if (offset.magnitude < minZoom)
+        {
+            offset = offset.normalized * minZoom;
         }
 
         // Calculate new rotation
