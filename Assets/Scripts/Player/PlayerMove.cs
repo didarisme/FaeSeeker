@@ -133,7 +133,16 @@ public class PlayerMove : MonoBehaviour
             speed = targetSpeed;
         }
 
-        Vector3 transformedInput = (currentInput.y * transform.TransformDirection(Vector3.forward)) + (currentInput.x * transform.TransformDirection(Vector3.right));
+        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraRight = Camera.main.transform.right;
+
+        cameraForward.y = 0;
+        cameraRight.y = 0;
+
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        Vector3 transformedInput = (currentInput.y * cameraForward) + (currentInput.x * cameraRight);
 
         if (!isClimbingLadder)
             targetRotation = Mathf.Atan2(transformedInput.x, transformedInput.z) * Mathf.Rad2Deg;

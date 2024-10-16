@@ -3,7 +3,87 @@ guid: 8e293d57ca2748041a5bb03bafe5ae61
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boots Fold
+    second: {fileID: 2100000, guid: 5f9549f8251104c198329e8448d24f38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Extract12
+    second: {fileID: 2100000, guid: aa48024132a0445a9aae2222ed77e623, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Extract13
+    second: {fileID: 2100000, guid: ece9e75e316164360b78b3ec905d4d39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Extract6
+    second: {fileID: 2100000, guid: 236d064f7a01f45be81f9825b5aecd17, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Extract7
+    second: {fileID: 2100000, guid: e91682409ca0744f3ae7caeb148a0713, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Extract8
+    second: {fileID: 2100000, guid: ea6195b1291774e5b8f87df6d7574966, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Extract9
+    second: {fileID: 2100000, guid: bea082a842ae54770b33b3783abcbb4b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Female Base Mesh Eyes1
+    second: {fileID: 2100000, guid: b8ef6602c11f144f29823e58bce31729, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gloves
+    second: {fileID: 2100000, guid: 4b07e36622bb1406690071fc7e56f952, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PM3D_Ring3D1
+    second: {fileID: 2100000, guid: ef9e08265cd0d476c90fac64cbd56331, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pants
+    second: {fileID: 2100000, guid: eadffb41dc29f4a7a9908f9f424edd4f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoe Top
+    second: {fileID: 2100000, guid: b12be53e476f04272b4e389c75186f9e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: T Pose_
+    second: {fileID: 2100000, guid: c164111fc116e4903ba717acf51300b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Teeth1
+    second: {fileID: 2100000, guid: 3c2c4590ff4f3480b9bd9425db5cea5c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Undershirt
+    second: {fileID: 2100000, guid: aae3d6752731e452693724bb2ddc5f17, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shoes_02
+    second: {fileID: 2100000, guid: 25efb7a79474b440dbe044e10ba5af4e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -77,11 +157,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - ea5412003b46c874ab8b2f79d6013a0f
-  - 90d0f643fa3967b4b8e0209c890f8739
-  - 05532f72800cd5544ab6ec6c431995ce
-  - 8483d27ece93eae4ea4fc6c191aa571e
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -590,13 +666,13 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Hips
       parentName: dax_00(Clone)
-      position: {x: -0.00000000453032, y: 0.009149308, z: -0.00008142527}
-      rotation: {x: 0.00000002293371, y: -0.00000017097997, z: -0.000003078208, w: 1}
+      position: {x: -0.0000000046200843, y: 0.009143908, z: -0.00008159347}
+      rotation: {x: 0.000000022808075, y: -0.00000017156428, z: -0.0000030613473, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Spine
       parentName: mixamorig:Hips
       position: {x: -0, y: 0.001016472, z: -0.00007852584}
-      rotation: {x: -0.038540546, y: 0.000000052217935, z: 0.00000308251, w: 0.9992571}
+      rotation: {x: -0.038540546, y: 0.000000053451632, z: 0.0000030656845, w: 0.9992571}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Spine1
       parentName: mixamorig:Spine
@@ -606,7 +682,7 @@ ModelImporter:
     - name: mixamorig:Spine2
       parentName: mixamorig:Spine1
       position: {x: -0, y: 0.0013593334, z: 2.1706638e-12}
-      rotation: {x: -6.938894e-18, y: 0, z: -1.4988356e-29, w: 1}
+      rotation: {x: -6.938894e-18, y: 0, z: -1.696051e-29, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:RightShoulder
       parentName: mixamorig:Spine2
@@ -651,7 +727,7 @@ ModelImporter:
     - name: mixamorig:RightHandThumb1
       parentName: mixamorig:RightHand
       position: {x: -0.0002564274, y: 0.00038327652, z: 0.00013392243}
-      rotation: {x: 0.06772193, y: 0.00021978837, z: 0.39165428, w: 0.9176168}
+      rotation: {x: 0.06772173, y: 0.00021976602, z: 0.3916544, w: 0.9176168}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:RightHandThumb2
       parentName: mixamorig:RightHandThumb1
@@ -771,7 +847,7 @@ ModelImporter:
     - name: mixamorig:LeftHandMiddle1
       parentName: mixamorig:LeftHand
       position: {x: 0.00012095059, y: 0.0013528047, z: -0.000042109805}
-      rotation: {x: -0.015082216, y: 0.008283886, z: -0.042520396, w: 0.99894744}
+      rotation: {x: -0.015082216, y: 0.008283885, z: -0.042520396, w: 0.9989474}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftHandMiddle2
       parentName: mixamorig:LeftHandMiddle1
@@ -791,7 +867,7 @@ ModelImporter:
     - name: mixamorig:LeftHandThumb1
       parentName: mixamorig:LeftHand
       position: {x: 0.00024697345, y: 0.0004069979, z: 0.00012253624}
-      rotation: {x: 0.062876634, y: 0.007053083, z: -0.41674945, w: 0.90681684}
+      rotation: {x: 0.06287643, y: 0.007053187, z: -0.41674948, w: 0.90681684}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftHandThumb2
       parentName: mixamorig:LeftHandThumb1
@@ -856,7 +932,7 @@ ModelImporter:
     - name: mixamorig:Head
       parentName: mixamorig:Neck
       position: {x: -0, y: 0.0005830085, z: 0.00024287672}
-      rotation: {x: 0, y: -0, z: -6.23012e-37, w: 1}
+      rotation: {x: 0, y: 0, z: 1.9983404e-37, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:HeadTop_End
       parentName: mixamorig:Head
@@ -866,22 +942,22 @@ ModelImporter:
     - name: mixamorig:LeftUpLeg
       parentName: mixamorig:Hips
       position: {x: -0.0012079971, y: -0.0005648166, z: 0.00005230612}
-      rotation: {x: 0.0026603893, y: 0.0045619523, z: 0.9997517, w: -0.021649012}
+      rotation: {x: 0.0026607062, y: 0.0045765503, z: 0.9997516, w: -0.021648921}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftLeg
       parentName: mixamorig:LeftUpLeg
       position: {x: 4.0330335e-12, y: 0.0036790676, z: -1.0156178e-11}
-      rotation: {x: -0.039517615, y: -0.00013921145, z: -0.04271381, w: 0.9983055}
+      rotation: {x: -0.039524082, y: -0.00013955415, z: -0.04271375, w: 0.99830526}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftFoot
       parentName: mixamorig:LeftLeg
       position: {x: -1.9866712e-11, y: 0.0037402145, z: 6.4723834e-12}
-      rotation: {x: 0.4386938, y: 0.082409635, z: -0.084118254, w: 0.8908875}
+      rotation: {x: 0.43868655, y: 0.082408965, z: -0.08411887, w: 0.8908911}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftToeBase
       parentName: mixamorig:LeftFoot
       position: {x: 1.2877812e-11, y: 0.0017925481, z: -1.6506766e-11}
-      rotation: {x: 0.32303396, y: 0.1345515, z: -0.046455458, w: 0.93562114}
+      rotation: {x: 0.32303396, y: 0.13455148, z: -0.046455458, w: 0.9356211}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftToe_End
       parentName: mixamorig:LeftToeBase
@@ -891,17 +967,17 @@ ModelImporter:
     - name: mixamorig:RightUpLeg
       parentName: mixamorig:Hips
       position: {x: 0.0012079971, y: -0.0005648166, z: 0.00006966843}
-      rotation: {x: -0.0027005144, y: 0.0023639072, z: 0.9997594, w: 0.021641899}
+      rotation: {x: -0.0027005887, y: 0.0023674425, z: 0.9997594, w: 0.021641908}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:RightLeg
       parentName: mixamorig:RightUpLeg
       position: {x: 5.1220025e-13, y: 0.0036798269, z: 4.7408904e-12}
-      rotation: {x: -0.03758488, y: 0.00018407851, z: 0.042720277, w: 0.9983799}
+      rotation: {x: -0.03756941, y: 0.00018489725, z: 0.042720374, w: 0.9983804}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:RightFoot
       parentName: mixamorig:RightLeg
       position: {x: 2.417694e-11, y: 0.0037391144, z: 5.807085e-11}
-      rotation: {x: 0.44263774, y: -0.08110992, z: 0.08360218, w: 0.88910276}
+      rotation: {x: 0.44262084, y: -0.08110837, z: 0.083603635, w: 0.8891112}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:RightToeBase
       parentName: mixamorig:RightFoot
