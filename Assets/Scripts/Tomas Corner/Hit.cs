@@ -6,6 +6,7 @@ using UnityEngine;
 public class Hit : MonoBehaviour
 {
     public Animator animator;
+    public int damage;
     private bool attacking = false; 
 
     // Start is called before the first frame update
@@ -14,7 +15,18 @@ public class Hit : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject other = collision.gameObject;
+        if (attacking)
+        {
+            if(other.tag == "Enemy")
+            // Handle collision while attacking
+            other.GetComponent<Mortality>().TakeDamage(damage);
+        }
+    }
+
+    // Input
     void Update()
     {
         if(Input.GetMouseButtonDown(0)){
