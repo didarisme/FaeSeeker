@@ -1,20 +1,29 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [SerializeField] private int sceneId = 1;
+    [SerializeField] private List<EntryUIAnim> elementsUI;
+    [SerializeField] private GameObject fadeIn;
+
+    private OptionsMenu optionsMenu;
+
+    private void Start()
+    {
+        optionsMenu = GetComponent<OptionsMenu>();
+        ShowElements(true);
+    }
 
     public void PlayButton()
     {
-        SceneManager.LoadScene(sceneId);
+        ShowElements(false);
+        fadeIn.SetActive(true);
     }
 
     public void OptionsButton()
     {
-        Debug.Log("Options");
+        ShowElements(false);
+        optionsMenu.OpenOptions();
     }
 
     public void CreditsButton()
@@ -24,7 +33,14 @@ public class MainMenuManager : MonoBehaviour
 
     public void QuitButton()
     {
-        Debug.Log("Quit");
         Application.Quit();
+    }
+
+    public void ShowElements(bool boolState)
+    {
+        foreach (EntryUIAnim element in elementsUI)
+        {
+            element.OnScreen(boolState);
+        }
     }
 }
