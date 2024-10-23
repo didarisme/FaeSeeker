@@ -5,6 +5,7 @@ public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private List<EntryUIAnim> elementsUI;
     [SerializeField] private GameObject fadeIn;
+    [SerializeField] private GameObject credits;
 
     private OptionsMenu optionsMenu;
 
@@ -28,7 +29,10 @@ public class MainMenuManager : MonoBehaviour
 
     public void CreditsButton()
     {
-        Debug.Log("Credits");
+        ShowElements(false);
+        credits.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void QuitButton()
@@ -42,5 +46,12 @@ public class MainMenuManager : MonoBehaviour
         {
             element.OnScreen(boolState);
         }
+    }
+
+    public void EndCreditsComplete()
+    {
+        credits.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
