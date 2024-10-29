@@ -21,16 +21,17 @@ public class Door : MonoBehaviour
         }
     }
     public void Open(){
-        if(ready){
-            currentCoroutine = StartCoroutine(Move(openTransform.position));
+        if(!ready){
+            StopAllCoroutines();
         }
+        currentCoroutine = StartCoroutine(Move(openTransform.position));
     }
 
     public void Close(){
-        if(ready){
-            currentCoroutine = StartCoroutine(Move(closedTransform.position));
+        if(!ready){
+            StopAllCoroutines();
         }
-        
+        currentCoroutine = StartCoroutine(Move(closedTransform.position));
     }
     private IEnumerator Move(Vector3 targetPosition)
     {
