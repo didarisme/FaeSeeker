@@ -31,18 +31,21 @@ public class MainMenuManager : MonoBehaviour
 
     public void PlayButton()
     {
+        SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
         ShowElements(false);
         fadeIn.SetActive(true);
     }
 
     public void OptionsButton()
     {
+        SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
         ShowElements(false);
         optionsMenu.OpenOptions();
     }
 
     public void CreditsButton()
     {
+        SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
         isCredits = true;
         ShowElements(false);
         credits.SetActive(true);

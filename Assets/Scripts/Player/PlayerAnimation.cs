@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] private float rotationSmoothTime = 0.5f;
+
     private float rotationVelocity = 0;
     private float speed;
 

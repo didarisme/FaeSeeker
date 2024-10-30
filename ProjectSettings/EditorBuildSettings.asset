@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Level/Scenes/MainSceneFolder/MainScene.unity
     guid: eba8d0c5c8cba65409160850b8a83fd6
+  - enabled: 1
+    path: Assets/Level/Scenes/BackroomsFolder/Backrooms.unity
+    guid: 467da3565b9e849449aa00315598fa8f
   m_configObjects: {}
