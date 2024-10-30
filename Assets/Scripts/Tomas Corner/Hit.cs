@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,37 +10,42 @@ public class Hit : MonoBehaviour
     public int damage;
     private bool attacking = false; 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
+    //Sword collision
+    void OnCollisionEnter(Collision collision)
     {
         GameObject other = collision.gameObject;
         if (attacking)
+        print("Slashed: "+ other.name);
         {
             if(other.tag == "Enemy")
-            // Handle collision while attacking
-            other.GetComponent<Mortality>().TakeDamage(damage);
+            {
+                // Handle collision while attacking
+                other.GetComponent<Mortality>().TakeDamage(damage);
+                other.GetComponent<Rigidbody>().AddForce(transform.forward * damage, ForceMode.Impulse);
+            }
+            
         }
     }
 
-    // Input
+    // Temporary input functionality
     void Update()
     {
         if(Input.GetMouseButtonDown(0)){
-            StartAttack();
+            if(!attacking){
+                StartAttack();
+            }
         }
     }
 
-    private void StartAttack(){
-        attacking = true;
+    public void StartAttack(){
         animator.SetTrigger("attackTrigger");
+        StartCoroutine(AttackCooldown());
+    }
+    IEnumerator AttackCooldown()
+    {
+        attacking = true;
+        yield return new WaitForSeconds(1f);
+        attacking=false;
     }
 
-    private void StopAttack(){
-
-    }
 }
