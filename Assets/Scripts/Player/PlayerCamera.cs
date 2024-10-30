@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
@@ -8,7 +6,7 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private float cameraMoveSpeed = 1f;
     [SerializeField] private float moveAmount = 4f;
 
-    private void LateUpdate()
+    private void Update()
     {
         float edgeSize = 30f;
         Vector3 cameraFollowPosition = targetObject.position;
@@ -16,24 +14,19 @@ public class PlayerCamera : MonoBehaviour
         if (Input.mousePosition.x > Screen.width - edgeSize)
         {
             cameraFollowPosition.x += moveAmount;
-            Debug.Log("Move Right");
         }
         if (Input.mousePosition.x < edgeSize)
         {
             cameraFollowPosition.x -= moveAmount;
-            Debug.Log("Move Left");
         }
         if (Input.mousePosition.y > Screen.height - edgeSize)
         {
             cameraFollowPosition.z += moveAmount;
-            Debug.Log("Move Up");
         }
         if (Input.mousePosition.y < edgeSize)
         {
             cameraFollowPosition.z -= moveAmount;
-            Debug.Log("Move Down");
         }
-
 
         HubaBubbaMove(cameraFollowPosition);
     }
