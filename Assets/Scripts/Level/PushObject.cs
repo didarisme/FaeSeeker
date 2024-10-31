@@ -4,6 +4,8 @@ public class PushObject : MonoBehaviour
 {
     [SerializeField] private float pushPower = 1f;
     [SerializeField] private float offset = 0.1f;
+    [SerializeField] private PlayerCamera playerCamera;
+
     private Transform model;
     private Animator anim;
 
@@ -43,6 +45,8 @@ public class PushObject : MonoBehaviour
 
             anim.SetBool("isPushing", true);
 
+            playerCamera.SetUpdateMode(false);
+
             CancelInvoke(nameof(ResetAnimation));
             Invoke(nameof(ResetAnimation), 0.1f);
         }
@@ -50,6 +54,7 @@ public class PushObject : MonoBehaviour
 
     private void ResetAnimation()
     {
+        playerCamera.SetUpdateMode(true);
         anim.SetBool("isPushing", false);
     }
 }

@@ -5,11 +5,30 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private Transform targetObject;
     [SerializeField] private float cameraMoveSpeed = 1f;
     [SerializeField] private float moveAmount = 4f;
+    [SerializeField] private float edgeSize = 30f; 
 
-    private void Update()
+    private Vector3 cameraFollowPosition;
+    private bool isLateUpdate = true;
+
+    private void LateUpdate()
     {
-        float edgeSize = 30f;
-        Vector3 cameraFollowPosition = targetObject.position;
+        if (!isLateUpdate) return;
+
+        ReTargetPosition();
+        CameraFollow(Time.deltaTime);
+    }
+
+    private void FixedUpdate()
+    {
+        if (isLateUpdate) return;
+
+        ReTargetPosition();
+        CameraFollow(Time.fixedDeltaTime);
+    }
+
+    private void ReTargetPosition()
+    {
+        cameraFollowPosition = targetObject.position;
 
         if (Input.mousePosition.x > Screen.width - edgeSize)
         {
@@ -27,18 +46,16 @@ public class PlayerCamera : MonoBehaviour
         {
             cameraFollowPosition.z -= moveAmount;
         }
-
-        HubaBubbaMove(cameraFollowPosition);
     }
 
-    private void HubaBubbaMove(Vector3 cameraFollowPosition)
+    private void CameraFollow(float deltaTime)
     {
         Vector3 cameraMoveDir = (cameraFollowPosition - transform.position).normalized;
         float distance = Vector3.Distance(cameraFollowPosition, transform.position);
 
         if (distance > 0)
         {
-            Vector3 newCameraPosition = transform.position + cameraMoveDir * distance * cameraMoveSpeed * Time.deltaTime;
+            Vector3 newCameraPosition = transform.position + cameraMoveSpeed * distance * deltaTime * cameraMoveDir;
 
             float distanceAfterMoving = Vector3.Distance(newCameraPosition, cameraFollowPosition);
 
@@ -49,5 +66,10 @@ public class PlayerCamera : MonoBehaviour
 
             transform.position = newCameraPosition;
         }
+    }
+
+    public void SetUpdateMode(bool isLate)
+    {
+        isLateUpdate = isLate;
     }
 }
