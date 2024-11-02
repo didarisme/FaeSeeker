@@ -72,4 +72,9 @@ public class PlayerCamera : MonoBehaviour
     {
         isLateUpdate = isLate;
     }
+
+    public void SetNewTarget(Transform newTargetObject)
+    {
+        targetObject = newTargetObject;
+    }
 }

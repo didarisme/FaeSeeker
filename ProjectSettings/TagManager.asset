@@ -4,20 +4,19 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Interactable
   - A
   - B
   - C
-  - Enemy
+  - Interactable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Terrain
+  - 
   - Water
   - UI
   - Player
-  - Enemy
+  - 
   - Interactable
   - 
   - 

@@ -247,6 +247,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Combat
       objectReference: {fileID: 0}
+    - target: {fileID: 6135658380646665607, guid: 536a2255f970e574384c7f59fca50fc5, type: 3}
+      propertyPath: GroundLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6357115096746075895, guid: 536a2255f970e574384c7f59fca50fc5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
