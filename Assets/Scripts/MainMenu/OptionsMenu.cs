@@ -22,6 +22,8 @@ public class OptionsMenu : MonoBehaviour
 
     public void ExitOptions()
     {
+        AudioManager.Instance.PlayAudio(AudioManager.SoundType.ButtonClick, 1, 0);
+
         foreach (EntryUIAnim element in elementsUI)
         {
             element.OnScreen(false);

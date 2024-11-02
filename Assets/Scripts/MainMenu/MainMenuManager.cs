@@ -31,21 +31,21 @@ public class MainMenuManager : MonoBehaviour
 
     public void PlayButton()
     {
-        SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+        AudioManager.Instance.PlayAudio(AudioManager.SoundType.ButtonClick, 0, 0);
         ShowElements(false);
         fadeIn.SetActive(true);
     }
 
     public void OptionsButton()
     {
-        SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+        AudioManager.Instance.PlayAudio(AudioManager.SoundType.ButtonClick, 0, 0);
         ShowElements(false);
         optionsMenu.OpenOptions();
     }
 
     public void CreditsButton()
     {
-        SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+        AudioManager.Instance.PlayAudio(AudioManager.SoundType.ButtonClick, 0, 0);
         isCredits = true;
         ShowElements(false);
         credits.SetActive(true);
