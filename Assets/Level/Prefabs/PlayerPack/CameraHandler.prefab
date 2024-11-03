@@ -49,7 +49,7 @@ MonoBehaviour:
   cameraTranform: {fileID: 6265736149908051044}
   distanceRange: {x: 5, y: 8}
   angle: 60
-  zoomTime: 0.5
+  zoomTime: 0.3
   cameraMoveSpeed: 2
   moveAmount: 1.5
   edgeSize: 30

@@ -4914,9 +4914,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 1553679968}
+  cameraTranform: {fileID: 2047620209}
+  distanceRange: {x: 6, y: 8}
+  angle: 60
+  zoomTime: 0.5
   cameraMoveSpeed: 2
   moveAmount: 1.5
   edgeSize: 30
+  zoomKey: 118
 --- !u!1 &1594127063
 GameObject:
   m_ObjectHideFlags: 0

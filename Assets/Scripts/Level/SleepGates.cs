@@ -6,7 +6,7 @@ public class SleepGates : MonoBehaviour
     [SerializeField] private PressurePlate plate;
     [SerializeField] private Transform sleepGate;
     [SerializeField] private Vector3 openPosition, closedPosition;
-    [SerializeField] private float timeToComplete = 1.5f;
+    [SerializeField] private float gateSpeed = 1.5f;
 
     private void OnEnable()
     {
@@ -34,27 +34,24 @@ public class SleepGates : MonoBehaviour
         {
             StopAllCoroutines();
 
-            StartCoroutine(MoveGate(isOpen, openPosition));
+            StartCoroutine(MoveGate(openPosition));
         }
         else
         {
             StopAllCoroutines();
 
-            StartCoroutine(MoveGate(isOpen, closedPosition));
+            StartCoroutine(MoveGate(closedPosition));
         }
     }
 
-    private IEnumerator MoveGate(bool isOpen, Vector3 targetPos)
+    private IEnumerator MoveGate(Vector3 targetPos)
     {
-        Vector3 startPos = sleepGate.localPosition;
-        float timeElapsed = 0;
-
-        while (timeElapsed <= timeToComplete)
+        while (Vector3.Distance(sleepGate.localPosition, targetPos) > 0.01f)
         {
-            sleepGate.localPosition = Vector3.Lerp(startPos, targetPos, timeElapsed / timeToComplete);
-            timeElapsed += Time.deltaTime;
-
-            yield return null;
+            sleepGate.localPosition = Vector3.MoveTowards(sleepGate.localPosition, targetPos, gateSpeed * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
         }
+
+        sleepGate.localPosition = targetPos;
     }
 }

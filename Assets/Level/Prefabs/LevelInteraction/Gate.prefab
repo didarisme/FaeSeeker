@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4401011320299194996}
   - component: {fileID: 1419244280321001081}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Column_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,7 +235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8539535696292913251}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -261,7 +261,7 @@ MonoBehaviour:
   sleepGate: {fileID: 5153291301931321253}
   openPosition: {x: 0, y: -1.98, z: 0}
   closedPosition: {x: 0, y: 0, z: 0}
-  timeToComplete: 1.5
+  gateSpeed: 1.5
 --- !u!1 &9169040041179992213
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 6394312192726475165}
   - component: {fileID: 3838049186239037523}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Column_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
