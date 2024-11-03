@@ -3,12 +3,13 @@ using UnityEngine;
 public class IdleState : BaseState
 {
     private float timeElapsed;
-    private float waitTimer;
+    private float idleTimer;
 
     public override void Enter()
     {
         enemy.Agent.SetDestination(enemy.transform.position);
-        waitTimer = Random.Range(1.5f, 6f);
+        Vector2 timeRange = enemy.npc.timeRanges.idleTimer;
+        idleTimer = Random.Range(timeRange.x, timeRange.y);
     }
 
     public override void Perform()
@@ -30,7 +31,7 @@ public class IdleState : BaseState
     {
         timeElapsed += Time.deltaTime;
 
-        if (timeElapsed >= waitTimer)
+        if (timeElapsed >= idleTimer)
         {
             stateMachine.ChangeState(new PatrolState());
         }

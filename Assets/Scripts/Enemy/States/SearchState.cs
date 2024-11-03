@@ -11,10 +11,12 @@ public class SearchState : BaseState
     {
         enemy.EnemyAnimator.SetBool("isPatrolling", true);
         enemy.Agent.SetDestination(enemy.LastKnowPos);
-        enemy.Agent.speed = enemy.patrolSpeed;
+        enemy.Agent.speed = enemy.npc.movement.patrolSpeed;
 
-        moveTimer = Random.Range(1, 5);
-        searchTimer = Random.Range(20, 45);
+        Vector2 moveTimeRange = enemy.npc.timeRanges.searchMoveTimer;
+        Vector2 searchTimeRange = enemy.npc.timeRanges.searchTimer;
+        moveTimer = Random.Range(moveTimeRange.x, moveTimeRange.y);
+        searchTimer = Random.Range(searchTimeRange.x, searchTimeRange.y);
     }
 
     public override void Perform()

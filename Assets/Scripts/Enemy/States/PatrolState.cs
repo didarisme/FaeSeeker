@@ -8,8 +8,9 @@ public class PatrolState : BaseState
     public override void Enter()
     {
         enemy.EnemyAnimator.SetBool("isPatrolling", true);
-        enemy.Agent.speed = enemy.patrolSpeed;
-        patrolTimer = Random.Range(2f, 10f);
+        enemy.Agent.speed = enemy.npc.movement.patrolSpeed;
+        Vector2 timeRange = enemy.npc.timeRanges.patrolTimer;
+        patrolTimer = Random.Range(timeRange.x, timeRange.y);
         enemy.Agent.SetDestination(enemy.path.wayPoints[enemy.waypointIndex].position);
     }
 

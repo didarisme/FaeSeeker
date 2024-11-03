@@ -133,8 +133,13 @@ public class PlayerMove : MonoBehaviour
             speed = targetSpeed;
         }
 
-        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraForward;
         Vector3 cameraRight = Camera.main.transform.right;
+
+        if (Camera.main.transform.forward == Vector3.down)
+            cameraForward = Camera.main.transform.up;
+        else
+            cameraForward = Camera.main.transform.forward;
 
         cameraForward.y = 0;
         cameraRight.y = 0;

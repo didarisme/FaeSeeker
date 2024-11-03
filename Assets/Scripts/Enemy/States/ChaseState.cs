@@ -5,7 +5,7 @@ public class ChaseState : BaseState
     public override void Enter()
     {
         enemy.Agent.SetDestination(enemy.Player.position);
-        enemy.Agent.speed = enemy.chaseSpeed;
+        enemy.Agent.speed = enemy.npc.movement.chaseSpeed;
         enemy.EnemyAnimator.SetBool("isChasing", true);
     }
 

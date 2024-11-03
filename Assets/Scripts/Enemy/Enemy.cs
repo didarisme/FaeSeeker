@@ -3,6 +3,15 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private string currentState;
+    [Space]
+    public NPCParameters npc;
+    public Transform viewPoint;
+
+    [Header("Patrol route")]
+    public EnemyPath path;
+    public int waypointIndex;
+
     private StateMachine stateMachine;
 
     private NavMeshAgent agent;
@@ -15,20 +24,6 @@ public class Enemy : MonoBehaviour
     public Transform Player { get => player; }
     public Vector3 LastKnowPos { get => lastKnowPos; set => lastKnowPos = value; }
     public Animator EnemyAnimator { get => enemyAnimator; }
-
-    [SerializeField] private string currentState;
-
-    [Header("Parameters")]
-    public float viewDistance = 10f;
-    public float hearDiatance = 20f;
-    public float patrolSpeed = 2f;
-    public float chaseSpeed = 5f;
-    public float fieldOfView = 85f;
-    public Transform viewPoint;
-
-    [Header("Patrol route")]
-    public EnemyPath path;
-    public int waypointIndex;
 
     void Start()
     {
@@ -50,21 +45,21 @@ public class Enemy : MonoBehaviour
     {
         if (player != null)
         {
-            if (Vector3.Distance(transform.position, player.position) < viewDistance)
+            if (Vector3.Distance(transform.position, player.position) < npc.detection.viewDistance)
             {
                 Vector3 targetDirection = (player.position + Vector3.up) - viewPoint.position;
                 float angleToPlayer = Vector3.Angle(targetDirection, viewPoint.forward);
 
-                if (angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
+                if (angleToPlayer >= -npc.detection.fieldOfView && angleToPlayer <= npc.detection.fieldOfView)
                 {
                     Ray ray = new Ray(viewPoint.position, targetDirection);
                     RaycastHit hitInfo = new RaycastHit();
 
-                    if (Physics.Raycast(ray, out hitInfo, viewDistance))
+                    if (Physics.Raycast(ray, out hitInfo, npc.detection.viewDistance))
                     {
                         if (hitInfo.transform.gameObject == player.gameObject)
                         {
-                            Debug.DrawRay(ray.origin, ray.direction * viewDistance);
+                            Debug.DrawRay(ray.origin, ray.direction * npc.detection.viewDistance);
                             return true;
                         }
                     }
@@ -81,7 +76,7 @@ public class Enemy : MonoBehaviour
         {
             float distance = Vector3.Distance(transform.position, player.position);
 
-            if (distance < hearDiatance)
+            if (distance < npc.detection.hearDistance)
             {
                 return true;
             }
