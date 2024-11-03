@@ -2,25 +2,17 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private SceneChanger sceneChanger;
     [SerializeField] private GameObject fadeIn;
 
-    private EntryUIAnim entryAnim;
-
-    private void Awake()
-    {
-        entryAnim = GetComponent<EntryUIAnim>();
-    }
-
-    private void Start()
+    private void OnEnable()
     {
         Time.timeScale = 0;
     }
 
     public void ContinueBtn()
     {
-        Time.timeScale = 1;
         gameObject.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void ExitLevelBtn()

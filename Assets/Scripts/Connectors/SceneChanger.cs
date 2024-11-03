@@ -3,10 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-    [SerializeField] private int sceneInd = 1;
-
-    public void OnFadeComplete()
+    public void ChangeScene(int sceneInd)
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(sceneInd);
     }
 }
