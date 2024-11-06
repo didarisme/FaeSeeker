@@ -17,10 +17,10 @@ MonoBehaviour:
     fieldOfView: 85
     hearDistance: 5
   movement:
-    patrolSpeed: 3
-    chaseSpeed: 6
+    patrolSpeed: 2
+    chaseSpeed: 4
   timeRanges:
     idleTimer: {x: 4, y: 5}
     patrolTimer: {x: 10, y: 15}
     searchTimer: {x: 20, y: 25}
-    searchMoveTimer: {x: 5, y: 6}
+    searchMoveTimer: {x: 2, y: 4}
