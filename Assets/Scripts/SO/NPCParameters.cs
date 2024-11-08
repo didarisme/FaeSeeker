@@ -24,7 +24,7 @@ public class NPCParameters : ScriptableObject
         public Vector2 idleTimer;
         public Vector2 patrolTimer;
         public Vector2 searchTimer;
-        public Vector2 searchMoveTimer;
+        public Vector2 searchIdleTimer;
     }
 
     [Header("Detection Parameters")]

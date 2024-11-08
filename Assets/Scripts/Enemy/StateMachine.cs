@@ -29,7 +29,7 @@ public class StateMachine : MonoBehaviour
         if (activeState != null)
         {
             activeState.stateMachine = this;
-            activeState.enemy = GetComponent<Enemy>();
+            activeState.npc = GetComponent<NonPlayerCharacter>();
             activeState.Enter();
         }
     }

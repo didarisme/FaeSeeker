@@ -11,12 +11,12 @@ public class SearchState : BaseState
 
     public override void Enter()
     {
-        enemy.EnemyAnimator.SetBool("isPatrolling", true);
-        enemy.Agent.SetDestination(enemy.LastKnowPos);
-        enemy.Agent.speed = enemy.npc.movement.patrolSpeed;
+        npc.EnemyAnimator.SetBool("isPatrolling", true);
+        npc.Agent.SetDestination(npc.LastKnowPos);
+        npc.Agent.speed = npc.parameters.movement.patrolSpeed;
 
-        idleTimeRange = enemy.npc.timeRanges.searchMoveTimer;
-        Vector2 searchTimeRange = enemy.npc.timeRanges.searchTimer;
+        idleTimeRange = npc.parameters.timeRanges.searchIdleTimer;
+        Vector2 searchTimeRange = npc.parameters.timeRanges.searchTimer;
         idleTimer = Random.Range(idleTimeRange.x, idleTimeRange.y);
         searchTimer = Random.Range(searchTimeRange.x, searchTimeRange.y);
         Debug.Log("Search State Started");
@@ -28,34 +28,22 @@ public class SearchState : BaseState
     {
         searchTimeElapsed += Time.deltaTime;
 
-        if (enemy.CanSeePlayer() || enemy.CanHearPlayer())
+        if (npc.CanSeePlayer() || npc.CanHearPlayer())
             stateMachine.ChangeState(new ChaseState());
 
-        if (enemy.Agent.remainingDistance < enemy.Agent.stoppingDistance)
+        if (npc.Agent.remainingDistance < npc.Agent.stoppingDistance)
         {
             moveTimeElapsed += Time.deltaTime;
 
-            enemy.EnemyAnimator.SetBool("isPatrolling", false);
+            npc.EnemyAnimator.SetBool("isPatrolling", false);
 
             if (moveTimeElapsed > idleTimer)
             {
-                Vector3 previousDestionation = enemy.Agent.destination;
-                Vector3 randomPosition = Random.insideUnitSphere * 10f;
-                Vector3 newDestination = enemy.transform.position + randomPosition;
+                npc.RandomDestination();
 
-                enemy.Agent.SetDestination(newDestination);
+                Debug.Log("New Point " + npc.Agent.destination);
 
-                while (previousDestionation == enemy.Agent.destination)
-                {
-                    Debug.Log("Recalculating");
-                    randomPosition = Random.insideUnitSphere * 10f;
-                    newDestination = enemy.transform.position + randomPosition;
-                    enemy.Agent.SetDestination(newDestination);
-                }
-
-                Debug.Log("New Point " + enemy.Agent.destination);
-
-                enemy.EnemyAnimator.SetBool("isPatrolling", true);
+                npc.EnemyAnimator.SetBool("isPatrolling", true);
 
                 idleTimer = Random.Range(idleTimeRange.x, idleTimeRange.y);
                 moveTimeElapsed = 0;
@@ -70,6 +58,6 @@ public class SearchState : BaseState
     public override void Exit()
     {
         Debug.Log("Exit!");
-        enemy.EnemyAnimator.SetBool("isPatrolling", false);
+        npc.EnemyAnimator.SetBool("isPatrolling", false);
     }
 }

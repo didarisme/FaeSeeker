@@ -131,7 +131,7 @@ NavMeshAgent:
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 160
+  m_AngularSpeed: 240
   m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 
-  npc: {fileID: 11400000, guid: bccee72d11b4f4fc6a4a65cbe65d6706, type: 2}
+  parameters: {fileID: 11400000, guid: bccee72d11b4f4fc6a4a65cbe65d6706, type: 2}
   viewPoint: {fileID: 6425622656901044552}
   path: {fileID: 0}
   waypointIndex: 0

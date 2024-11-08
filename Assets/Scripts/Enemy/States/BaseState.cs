@@ -1,6 +1,6 @@
 public abstract class BaseState
 {
-    public Enemy enemy;
+    public NonPlayerCharacter npc;
     public StateMachine stateMachine;
 
     public abstract void Enter();

@@ -4,21 +4,43 @@ public class PatrolState : BaseState
 {
     private float timeElapsed;
     private float patrolTimer;
+    private bool isRandomPath;
+    private Vector3 patrolPoint;
 
     public override void Enter()
     {
-        enemy.EnemyAnimator.SetBool("isPatrolling", true);
-        enemy.Agent.speed = enemy.npc.movement.patrolSpeed;
-        Vector2 timeRange = enemy.npc.timeRanges.patrolTimer;
+        npc.EnemyAnimator.SetBool("isPatrolling", true);
+        npc.Agent.speed = npc.parameters.movement.patrolSpeed;
+
+        Vector2 timeRange = npc.parameters.timeRanges.patrolTimer;
         patrolTimer = Random.Range(timeRange.x, timeRange.y);
-        enemy.Agent.SetDestination(enemy.path.wayPoints[enemy.waypointIndex].position);
+
+        if (npc.path == null)
+        {
+            isRandomPath = true;
+
+            if (npc.lastPatrolPoint != Vector3.zero)
+            {
+                npc.Agent.SetDestination(npc.lastPatrolPoint);
+            }
+            else
+            {
+                patrolPoint = npc.RandomDestination();
+                npc.Agent.SetDestination(patrolPoint);
+                Debug.Log("Check calculations! " + patrolPoint + npc.Agent.destination);
+            }
+        }
+        else
+        {
+            npc.Agent.SetDestination(npc.path.wayPoints[npc.waypointIndex].position);
+        }
     }
 
     public override void Perform()
     {
         PatrolCycle();
 
-        if (enemy.CanSeePlayer() || enemy.CanHearPlayer())
+        if (npc.CanSeePlayer() || npc.CanHearPlayer())
         {
             stateMachine.ChangeState(new ChaseState());
         }
@@ -26,26 +48,47 @@ public class PatrolState : BaseState
 
     public override void Exit()
     {
-        enemy.EnemyAnimator.SetBool("isPatrolling", false);
+        npc.EnemyAnimator.SetBool("isPatrolling", false);
     }
 
-    public void PatrolCycle()
+    private void PatrolCycle()
     {
         timeElapsed += Time.deltaTime;
 
-        if (enemy.Agent.remainingDistance < 0.1f)
+        if (isRandomPath && npc.Agent.remainingDistance < 0.1f)
         {
-            if (enemy.waypointIndex < enemy.path.wayPoints.Count - 1)
-                enemy.waypointIndex++;
-            else
-                enemy.waypointIndex = 0;
+            patrolPoint = npc.RandomDestination();
+            npc.Agent.SetDestination(patrolPoint);
+            Debug.Log("Check calculations! " + patrolPoint + npc.Agent.destination);
 
-            enemy.Agent.SetDestination(enemy.path.wayPoints[enemy.waypointIndex].position);
-            stateMachine.ChangeState(new IdleState());
+            npc.lastPatrolPoint = npc.Agent.destination;
+
+            CheckForIdle();
         }
-        else if (timeElapsed > patrolTimer)
+        else if (!isRandomPath && npc.Agent.remainingDistance < 0.1f)
+        {
+            if (npc.waypointIndex < npc.path.wayPoints.Count - 1)
+                npc.waypointIndex++;
+            else
+                npc.waypointIndex = 0;
+
+            npc.Agent.SetDestination(npc.path.wayPoints[npc.waypointIndex].position);
+
+            CheckForIdle();
+        }
+
+        if (timeElapsed > patrolTimer)
         {
             stateMachine.ChangeState(new IdleState());
         }
+    }
+
+    private void CheckForIdle()
+    {
+        float idleChance = Random.value;
+        Debug.Log("Chance for idle: " + idleChance);
+
+        if (idleChance <= 0.5f)
+            stateMachine.ChangeState(new IdleState());
     }
 }

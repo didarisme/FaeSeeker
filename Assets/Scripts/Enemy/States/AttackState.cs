@@ -4,21 +4,21 @@ public class AttackState : BaseState
 {
     public override void Enter()
     {
-        enemy.Agent.SetDestination(enemy.Player.position);
-        enemy.Agent.speed = 0.1f;
-        enemy.EnemyAnimator.SetBool("isAttacking", true);
+        npc.Agent.SetDestination(npc.Player.position);
+        npc.Agent.speed = 0.1f;
+        npc.EnemyAnimator.SetBool("isAttacking", true);
     }
 
     public override void Perform()
     {
-        enemy.transform.LookAt(enemy.Player);
+        npc.transform.LookAt(npc.Player);
 
-        float distance = Vector3.Distance(enemy.Player.position, enemy.transform.position);
+        float distance = Vector3.Distance(npc.Player.position, npc.transform.position);
 
         if (distance < 0.4)
-            enemy.Agent.speed = 0;
+            npc.Agent.speed = 0;
         else
-            enemy.Agent.speed = 0.1f;
+            npc.Agent.speed = 0.1f;
 
         if (distance > 2.1f)
             stateMachine.ChangeState(new ChaseState());
@@ -26,6 +26,6 @@ public class AttackState : BaseState
 
     public override void Exit()
     {
-        enemy.EnemyAnimator.SetBool("isAttacking", false);
+        npc.EnemyAnimator.SetBool("isAttacking", false);
     }
 }

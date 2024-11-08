@@ -7,8 +7,8 @@ public class IdleState : BaseState
 
     public override void Enter()
     {
-        enemy.Agent.SetDestination(enemy.transform.position);
-        Vector2 timeRange = enemy.npc.timeRanges.idleTimer;
+        npc.Agent.SetDestination(npc.transform.position);
+        Vector2 timeRange = npc.parameters.timeRanges.idleTimer;
         idleTimer = Random.Range(timeRange.x, timeRange.y);
     }
 
@@ -16,7 +16,7 @@ public class IdleState : BaseState
     {
         Idling();
 
-        if (enemy.CanSeePlayer() || enemy.CanHearPlayer())
+        if (npc.CanSeePlayer() || npc.CanHearPlayer())
         {
             stateMachine.ChangeState(new ChaseState());
         }
