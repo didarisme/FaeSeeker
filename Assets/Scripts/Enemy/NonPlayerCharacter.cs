@@ -19,12 +19,14 @@ public class NonPlayerCharacter : MonoBehaviour
     private NavMeshAgent agent;
     private Transform player;
     private Vector3 lastKnowPos;
-    private Animator enemyAnimator;
+    private Animator characterAnimator;
 
     public NavMeshAgent Agent { get => agent; }
     public Transform Player { get => player; }
     public Vector3 LastKnowPos { get => lastKnowPos; set => lastKnowPos = value; }
-    public Animator EnemyAnimator { get => enemyAnimator; }
+    public Animator CharacterAnimator { get => characterAnimator; }
+
+    public float distance;
 
     private void Start()
     {
@@ -40,7 +42,7 @@ public class NonPlayerCharacter : MonoBehaviour
         playerMove = player.GetComponent<PlayerMove>();
 
         agent = GetComponent<NavMeshAgent>();
-        enemyAnimator = GetComponentInChildren<Animator>();
+        characterAnimator = GetComponentInChildren<Animator>();
         stateMachine.Initialise();
     }
 
@@ -48,15 +50,20 @@ public class NonPlayerCharacter : MonoBehaviour
     {
         if (parameters == null) return;
 
-        CanSeePlayer();
+        DistanceCheck();
         currentState = stateMachine.activeState.ToString();
+    }
+
+    private void DistanceCheck()
+    {
+        distance = Vector3.Distance(transform.position, player.position);
     }
 
     public bool CanSeePlayer()
     {
         if (player != null)
         {
-            if (Vector3.Distance(transform.position, player.position) < parameters.detection.viewDistance)
+            if (distance < parameters.detection.viewDistance)
             {
                 Vector3 targetDirection = (player.position + Vector3.up) - viewPoint.position;
                 float angleToPlayer = Vector3.Angle(targetDirection, viewPoint.forward);
@@ -84,8 +91,6 @@ public class NonPlayerCharacter : MonoBehaviour
     {
         if (playerMove.CurrentState != PlayerMove.MovementState.crouchning && Vector3.Magnitude(playerMove.CurrentInput) > 0)
         {
-            float distance = Vector3.Distance(transform.position, player.position);
-
             if (distance < parameters.detection.hearDistance)
             {
                 return true;

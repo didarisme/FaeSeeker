@@ -9,7 +9,7 @@ public class PatrolState : BaseState
 
     public override void Enter()
     {
-        npc.EnemyAnimator.SetBool("isPatrolling", true);
+        npc.CharacterAnimator.SetBool("isPatrolling", true);
         npc.Agent.speed = npc.parameters.movement.patrolSpeed;
 
         Vector2 timeRange = npc.parameters.timeRanges.patrolTimer;
@@ -48,7 +48,7 @@ public class PatrolState : BaseState
 
     public override void Exit()
     {
-        npc.EnemyAnimator.SetBool("isPatrolling", false);
+        npc.CharacterAnimator.SetBool("isPatrolling", false);
     }
 
     private void PatrolCycle()

@@ -11,7 +11,7 @@ public class SearchState : BaseState
 
     public override void Enter()
     {
-        npc.EnemyAnimator.SetBool("isPatrolling", true);
+        npc.CharacterAnimator.SetBool("isPatrolling", true);
         npc.Agent.SetDestination(npc.LastKnowPos);
         npc.Agent.speed = npc.parameters.movement.patrolSpeed;
 
@@ -35,15 +35,16 @@ public class SearchState : BaseState
         {
             moveTimeElapsed += Time.deltaTime;
 
-            npc.EnemyAnimator.SetBool("isPatrolling", false);
+            npc.CharacterAnimator.SetBool("isPatrolling", false);
 
             if (moveTimeElapsed > idleTimer)
             {
-                npc.RandomDestination();
+                Vector3 randomPoint = npc.RandomDestination();
+                npc.Agent.SetDestination(randomPoint);
 
                 Debug.Log("New Point " + npc.Agent.destination);
 
-                npc.EnemyAnimator.SetBool("isPatrolling", true);
+                npc.CharacterAnimator.SetBool("isPatrolling", true);
 
                 idleTimer = Random.Range(idleTimeRange.x, idleTimeRange.y);
                 moveTimeElapsed = 0;
@@ -58,6 +59,6 @@ public class SearchState : BaseState
     public override void Exit()
     {
         Debug.Log("Exit!");
-        npc.EnemyAnimator.SetBool("isPatrolling", false);
+        npc.CharacterAnimator.SetBool("isPatrolling", false);
     }
 }

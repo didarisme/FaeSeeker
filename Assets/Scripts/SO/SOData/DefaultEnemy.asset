@@ -22,5 +22,5 @@ MonoBehaviour:
   timeRanges:
     idleTimer: {x: 1, y: 3}
     patrolTimer: {x: 10, y: 15}
-    searchTimer: {x: 20, y: 25}
+    searchTimer: {x: 6, y: 12}
     searchIdleTimer: {x: 1, y: 3}

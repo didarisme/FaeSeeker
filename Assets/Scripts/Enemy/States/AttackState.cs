@@ -6,7 +6,7 @@ public class AttackState : BaseState
     {
         npc.Agent.SetDestination(npc.Player.position);
         npc.Agent.speed = 0.1f;
-        npc.EnemyAnimator.SetBool("isAttacking", true);
+        npc.CharacterAnimator.SetBool("isAttacking", true);
     }
 
     public override void Perform()
@@ -26,6 +26,6 @@ public class AttackState : BaseState
 
     public override void Exit()
     {
-        npc.EnemyAnimator.SetBool("isAttacking", false);
+        npc.CharacterAnimator.SetBool("isAttacking", false);
     }
 }
