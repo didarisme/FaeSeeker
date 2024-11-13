@@ -8,6 +8,11 @@ public class GameManager : MonoBehaviour
     [Header("Controls")]
     [SerializeField] private KeyCode pauseKey = KeyCode.Escape;
 
+    private void Start()
+    {
+        Application.targetFrameRate = 60;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(pauseKey))

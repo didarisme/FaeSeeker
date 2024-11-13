@@ -45,7 +45,8 @@ public class PushObject : MonoBehaviour
 
             anim.SetBool("isPushing", true);
 
-            playerCamera.SetUpdateMode(false);
+            if (playerCamera != null)
+                playerCamera.SetUpdateMode(false);
 
             CancelInvoke(nameof(ResetAnimation));
             Invoke(nameof(ResetAnimation), 0.1f);
@@ -54,7 +55,9 @@ public class PushObject : MonoBehaviour
 
     private void ResetAnimation()
     {
-        playerCamera.SetUpdateMode(true);
+        if (playerCamera != null)
+            playerCamera.SetUpdateMode(true);
+
         anim.SetBool("isPushing", false);
     }
 }
