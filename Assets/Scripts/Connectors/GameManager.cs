@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.numerator;
     }
 
     private void Update()

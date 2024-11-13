@@ -9,6 +9,10 @@ public class PushObject : MonoBehaviour
     private Transform model;
     private Animator anim;
 
+    private bool shouldPushObject;
+    private Rigidbody objectRigidbody;
+    private Vector3 forceDirection;
+
     private void Awake()
     {
         model = GetComponentInChildren<PlayerAnimation>().transform;
@@ -18,30 +22,46 @@ public class PushObject : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Rigidbody rigidbody = hit.collider.attachedRigidbody;
-        float rotation = model.eulerAngles.y;
 
-        if (rigidbody != null && Mathf.Round(rotation / 10) * 10 % 90 == 0)
+        if (rigidbody != null && Mathf.Round(model.eulerAngles.y / 10) * 10 % 90 == 0)
+        {
+            objectRigidbody = rigidbody;
+            forceDirection = hit.moveDirection;
+            forceDirection.y = 0;
+
+            shouldPushObject = true;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (shouldPushObject)
         {
             Vector3 playerPos = transform.position;
-            Vector3 pushObject = hit.transform.position;
-
-            Vector3 forceDirection = hit.moveDirection;
-            forceDirection.y = 0;
+            Vector3 pushObject = objectRigidbody.transform.position;
 
             if (Mathf.Abs(forceDirection.x) > Mathf.Abs(forceDirection.z))
             {
                 forceDirection.z = 0;
 
-                if (Mathf.Abs(playerPos.z - pushObject.z) > offset) return;
+                if (Mathf.Abs(playerPos.z - pushObject.z) > offset)
+                {
+                    shouldPushObject = false;
+                    return;
+                }
             }
             else
             {
                 forceDirection.x = 0;
 
-                if (Mathf.Abs(playerPos.x - pushObject.x) > offset) return;
+                if (Mathf.Abs(playerPos.x - pushObject.x) > offset)
+                {
+                    shouldPushObject = false;
+                    return;
+                }
             }
 
-            rigidbody.AddForceAtPosition(forceDirection.normalized * pushPower, transform.position, ForceMode.Impulse);
+            objectRigidbody.AddForceAtPosition(forceDirection.normalized * pushPower, transform.position, ForceMode.Impulse);
 
             anim.SetBool("isPushing", true);
 
@@ -50,6 +70,8 @@ public class PushObject : MonoBehaviour
 
             CancelInvoke(nameof(ResetAnimation));
             Invoke(nameof(ResetAnimation), 0.1f);
+
+            shouldPushObject = false;
         }
     }
 
