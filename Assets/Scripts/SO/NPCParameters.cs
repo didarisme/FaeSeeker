@@ -30,6 +30,7 @@ public class NPCParameters : ScriptableObject
     [System.Serializable]
     public struct BehaviourParameters
     {
+        public float health;
         public float attackCooldown;
         public bool isFriendly;
     }
