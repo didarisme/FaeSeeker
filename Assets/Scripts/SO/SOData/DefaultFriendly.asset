@@ -25,5 +25,6 @@ MonoBehaviour:
     searchTimer: {x: 0, y: 0}
     searchIdleTimer: {x: 0, y: 0}
   behaviour:
-    attackCooldown: 2
+    health: 0
+    attackCooldown: 0
     isFriendly: 1

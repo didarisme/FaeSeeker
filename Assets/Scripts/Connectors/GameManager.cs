@@ -4,6 +4,7 @@ public class GameManager : MonoBehaviour
 {
     [Header("Links")]
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject fadeIn;
 
     [Header("Controls")]
     [SerializeField] private KeyCode pauseKey = KeyCode.Escape;
@@ -19,5 +20,11 @@ public class GameManager : MonoBehaviour
         {
             pauseMenu.SetActive(true);
         }
+    }
+
+    public void EndGame()
+    {
+        Time.timeScale = 0;
+        fadeIn.SetActive(true);
     }
 }

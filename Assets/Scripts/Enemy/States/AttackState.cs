@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class AttackState : BaseState
 {
-    private float timeElapsed;
-    private float attackCooldown;
+    private float timeElapsed, attackCooldown;
+    private int damage;
     private bool isAttacking = false;
     private bool isMovingBack = false;
 
@@ -13,6 +13,7 @@ public class AttackState : BaseState
         npc.Agent.SetDestination(npc.transform.position);
         npc.Agent.speed = 0f;
         attackCooldown = npc.parameters.behaviour.attackCooldown;
+        damage = 1;
         timeElapsed = attackCooldown;
     }
 
@@ -61,7 +62,10 @@ public class AttackState : BaseState
         isAttacking = true;
         npc.CharacterAnimator.SetTrigger("OnAttack");
 
-        Debug.Log("I am attacking you!"); //Put damage logick here
+        Debug.Log("I am attacking you!");
+
+        if (npc.Player.TryGetComponent<PlayerStats>(out PlayerStats playerStats))
+            playerStats.OnTakeDamage(damage);
 
         npc.StartCoroutine(ResetAttack());
     }
@@ -70,6 +74,7 @@ public class AttackState : BaseState
     {
         if (npc.Agent.remainingDistance < 0.1f || npc.PlayerDistance > 2f)
         {
+            npc.CharacterAnimator.SetBool("isPatrolling", false);
             stateMachine.ChangeState(new ChaseState());
         }
     }
@@ -83,11 +88,13 @@ public class AttackState : BaseState
         if (notAttackChance < 0.35f)
         {
             isMovingBack = true;
-            
+
             Vector3 newDestination = npc.transform.forward * -1f;
             Vector3 randomSpread = npc.transform.right * Random.Range(-1f, 1f);
             npc.Agent.SetDestination(npc.transform.position + newDestination + randomSpread);
             npc.Agent.speed = 1.5f;
+
+            npc.CharacterAnimator.SetBool("isPatrolling", true);
         }
     }
 

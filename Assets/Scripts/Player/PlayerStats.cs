@@ -1,15 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] private float maxHealth = 100f;
-    [SerializeField] private float maxMana = 100f;
+    [SerializeField] private int maxHealth = 12;
+    [SerializeField] private int maxMana = 6;
 
-    private float currentHealth, currentMana;
+    private int currentHealth, currentMana;
 
-    public void OnTakeDamage(float damageAmount)
+    private PlayerStatsUI playerStatsUI;
+    private GameManager gameManager;
+
+    private void Start()
+    {
+        playerStatsUI = FindObjectOfType<PlayerStatsUI>();
+        gameManager = FindObjectOfType<GameManager>();
+        currentHealth = maxHealth;
+        currentMana = maxMana;
+    }
+
+    public void OnTakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
 
@@ -19,18 +28,25 @@ public class PlayerStats : MonoBehaviour
             KillPlayer();
         }
 
-        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        if (playerStatsUI != null)
+            playerStatsUI.UpdateHealthUI(currentHealth);
     }
 
-    public void OnManaUse(float manaAmount)
+    public bool OnManaUse(int manaAmount)
     {
         currentMana -= manaAmount;
+        currentMana = Mathf.Clamp(currentMana, 0, maxMana);
 
-        currentMana = Mathf.Clamp(currentMana, 0f, maxMana);
+        if (playerStatsUI != null)
+            playerStatsUI.UpdateManaUI(currentMana);
+
+        return currentMana > 0;
     }
 
     public void KillPlayer()
     {
-        Debug.Log("Dead");
+        gameManager.EndGame();
     }
 }
