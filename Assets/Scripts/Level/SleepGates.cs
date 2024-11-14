@@ -3,21 +3,27 @@ using UnityEngine;
 
 public class SleepGates : MonoBehaviour
 {
-    [SerializeField] private PressurePlate plate;
+    [SerializeField] private PressurePlate[] plates;
     [SerializeField] private Transform sleepGate;
     [SerializeField] private Vector3 openPosition, closedPosition;
     [SerializeField] private float gateSpeed = 1.5f;
 
+    private int activePlates;
+
     private void OnEnable()
     {
-        if (plate != null)
-            plate.OnPlatePressure += OpenGate;
+        foreach (var plate in plates)
+        {
+            plate.OnPlatePressure += HandlePlatePressure;
+        }
     }
 
     private void OnDisable()
     {
-        if (plate != null)
-            plate.OnPlatePressure -= OpenGate;
+        foreach (var plate in plates)
+        {
+            plate.OnPlatePressure -= HandlePlatePressure;
+        }
     }
 
     private void Start()
@@ -25,21 +31,31 @@ public class SleepGates : MonoBehaviour
         if (sleepGate != null)
             closedPosition = sleepGate.localPosition;
         else
-            Debug.Log(sleepGate + " why?");
+            Debug.LogError(sleepGate + " is not assigned properly.");
     }
 
-    private void OpenGate(bool isOpen)
+    private void HandlePlatePressure(bool isPressed)
     {
-        if (isOpen)
+        if (isPressed)
+        {
+            activePlates++;
+        }
+        else
+        {
+            activePlates--;
+        }
+
+        // Проверяем, все ли плиты активированы
+        bool shouldOpenGate = activePlates == plates.Length;
+
+        if (shouldOpenGate)
         {
             StopAllCoroutines();
-
             StartCoroutine(MoveGate(openPosition));
         }
         else
         {
             StopAllCoroutines();
-
             StartCoroutine(MoveGate(closedPosition));
         }
     }
@@ -49,7 +65,7 @@ public class SleepGates : MonoBehaviour
         while (Vector3.Distance(sleepGate.localPosition, targetPos) > 0.01f)
         {
             sleepGate.localPosition = Vector3.MoveTowards(sleepGate.localPosition, targetPos, gateSpeed * Time.deltaTime);
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         sleepGate.localPosition = targetPos;
