@@ -59,6 +59,8 @@ public class PlayerSword : MonoBehaviour
         foreach (NonPlayerCharacter enemy in enemies)
         {
             //defeat NPC
+            Destroy(enemy);
+            
         }
     }
 
