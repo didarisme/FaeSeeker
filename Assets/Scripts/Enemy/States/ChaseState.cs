@@ -15,9 +15,7 @@ public class ChaseState : BaseState
         {
             npc.Agent.SetDestination(npc.Player.position);
 
-            float distance = Vector3.Distance(npc.Player.position, npc.transform.position);
-
-            if (distance < 2f)
+            if (npc.PlayerDistance < 1f)
                 stateMachine.ChangeState(new AttackState());
         }
         else

@@ -10,23 +10,26 @@ public class NonPlayerCharacter : MonoBehaviour
 
     [Header("Patrol route")]
     public EnemyPath path;
-    public int waypointIndex;
-    public Vector3 lastPatrolPoint;
+
+    private int waypointIndex;
+    private float distance;
+    private Vector3 lastKnowPos, lastPatrolPoint;
 
     private PlayerMove playerMove;
     private StateMachine stateMachine;
 
     private NavMeshAgent agent;
     private Transform player;
-    private Vector3 lastKnowPos;
     private Animator characterAnimator;
 
     public NavMeshAgent Agent { get => agent; }
     public Transform Player { get => player; }
-    public Vector3 LastKnowPos { get => lastKnowPos; set => lastKnowPos = value; }
     public Animator CharacterAnimator { get => characterAnimator; }
 
-    public float distance;
+    public int WaypointIndex { get => waypointIndex; set => waypointIndex = value; }
+    public float PlayerDistance { get => distance; }
+    public Vector3 LastKnowPos { get => lastKnowPos; set => lastKnowPos = value; }
+    public Vector3 LastPatrolPoint { get => lastPatrolPoint; set => lastPatrolPoint = value; }    
 
     private void Start()
     {
@@ -61,7 +64,7 @@ public class NonPlayerCharacter : MonoBehaviour
 
     public bool CanSeePlayer()
     {
-        if (player != null)
+        if (player != null && !parameters.behaviour.isFriendly)
         {
             if (distance < parameters.detection.viewDistance)
             {
@@ -89,7 +92,7 @@ public class NonPlayerCharacter : MonoBehaviour
 
     public bool CanHearPlayer()
     {
-        if (playerMove.CurrentState != PlayerMove.MovementState.crouchning && Vector3.Magnitude(playerMove.CurrentInput) > 0)
+        if (playerMove.CurrentState != PlayerMove.MovementState.crouchning && Vector3.Magnitude(playerMove.CurrentInput) > 0 && !parameters.behaviour.isFriendly)
         {
             if (distance < parameters.detection.hearDistance)
             {

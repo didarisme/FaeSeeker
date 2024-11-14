@@ -27,6 +27,13 @@ public class NPCParameters : ScriptableObject
         public Vector2 searchIdleTimer;
     }
 
+    [System.Serializable]
+    public struct BehaviourParameters
+    {
+        public float attackCooldown;
+        public bool isFriendly;
+    }
+
     [Header("Detection Parameters")]
     public DetectionParameters detection;
 
@@ -35,4 +42,7 @@ public class NPCParameters : ScriptableObject
 
     [Header("Timer Parameters")]
     public TimerParameters timeRanges;
+
+    [Header("Behaviour Parameters")]
+    public BehaviourParameters behaviour;
 }

@@ -19,20 +19,20 @@ public class PatrolState : BaseState
         {
             isRandomPath = true;
 
-            if (npc.lastPatrolPoint != Vector3.zero)
+            if (npc.LastPatrolPoint != Vector3.zero)
             {
-                npc.Agent.SetDestination(npc.lastPatrolPoint);
+                npc.Agent.SetDestination(npc.LastPatrolPoint);
             }
             else
             {
                 patrolPoint = npc.RandomDestination();
                 npc.Agent.SetDestination(patrolPoint);
-                Debug.Log("Check calculations! " + patrolPoint + npc.Agent.destination);
+                //Debug.Log("Check calculations! " + patrolPoint + npc.Agent.destination);
             }
         }
         else
         {
-            npc.Agent.SetDestination(npc.path.wayPoints[npc.waypointIndex].position);
+            npc.Agent.SetDestination(npc.path.wayPoints[npc.WaypointIndex].position);
         }
     }
 
@@ -59,20 +59,20 @@ public class PatrolState : BaseState
         {
             patrolPoint = npc.RandomDestination();
             npc.Agent.SetDestination(patrolPoint);
-            Debug.Log("Check calculations! " + patrolPoint + npc.Agent.destination);
+            //Debug.Log("Check calculations! " + patrolPoint + npc.Agent.destination);
 
-            npc.lastPatrolPoint = npc.Agent.destination;
+            npc.LastPatrolPoint = npc.Agent.destination;
 
             CheckForIdle();
         }
         else if (!isRandomPath && npc.Agent.remainingDistance < 0.1f)
         {
-            if (npc.waypointIndex < npc.path.wayPoints.Count - 1)
-                npc.waypointIndex++;
+            if (npc.WaypointIndex < npc.path.wayPoints.Count - 1)
+                npc.WaypointIndex++;
             else
-                npc.waypointIndex = 0;
+                npc.WaypointIndex = 0;
 
-            npc.Agent.SetDestination(npc.path.wayPoints[npc.waypointIndex].position);
+            npc.Agent.SetDestination(npc.path.wayPoints[npc.WaypointIndex].position);
 
             CheckForIdle();
         }
@@ -86,7 +86,7 @@ public class PatrolState : BaseState
     private void CheckForIdle()
     {
         float idleChance = Random.value;
-        Debug.Log("Chance for idle: " + idleChance);
+        //Debug.Log("Chance for idle: " + idleChance);
 
         if (idleChance <= 0.5f)
             stateMachine.ChangeState(new IdleState());

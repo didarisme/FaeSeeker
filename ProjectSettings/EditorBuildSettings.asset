@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Level/Scenes/MainMenuFolder/MainMenu.unity
     guid: 16f8f4a4534481349b013d1fbf1b5d51
   - enabled: 1
-    path: Assets/Level/Scenes/MainSceneFolder/MainScene.unity
+    path: Assets/Level/Scenes/NotMainSceneFolder/MainScene.unity
     guid: eba8d0c5c8cba65409160850b8a83fd6
   - enabled: 1
     path: Assets/Level/Scenes/BackroomsFolder/Backrooms.unity

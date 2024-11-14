@@ -19,9 +19,9 @@ public class SearchState : BaseState
         Vector2 searchTimeRange = npc.parameters.timeRanges.searchTimer;
         idleTimer = Random.Range(idleTimeRange.x, idleTimeRange.y);
         searchTimer = Random.Range(searchTimeRange.x, searchTimeRange.y);
-        Debug.Log("Search State Started");
-        Debug.Log("move time: " + idleTimer);
-        Debug.Log("search time: " + searchTimer);
+        //Debug.Log("Search State Started");
+        //Debug.Log("move time: " + idleTimer);
+        //Debug.Log("search time: " + searchTimer);
     }
 
     public override void Perform()
@@ -42,7 +42,7 @@ public class SearchState : BaseState
                 Vector3 randomPoint = npc.RandomDestination();
                 npc.Agent.SetDestination(randomPoint);
 
-                Debug.Log("New Point " + npc.Agent.destination);
+                //Debug.Log("New Point " + npc.Agent.destination);
 
                 npc.CharacterAnimator.SetBool("isPatrolling", true);
 
@@ -58,7 +58,7 @@ public class SearchState : BaseState
 
     public override void Exit()
     {
-        Debug.Log("Exit!");
+        //Debug.Log("Exit!");
         npc.CharacterAnimator.SetBool("isPatrolling", false);
     }
 }

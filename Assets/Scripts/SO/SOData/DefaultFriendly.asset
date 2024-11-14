@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e6fa782739a54c6293aaa5be1a6d96b, type: 3}
-  m_Name: DefaultEnemy
+  m_Name: DefaultFriendly
   m_EditorClassIdentifier: 
   detection:
-    viewDistance: 10
-    fieldOfView: 85
-    hearDistance: 5
+    viewDistance: 0
+    fieldOfView: 0
+    hearDistance: 0
   movement:
     patrolSpeed: 2
-    chaseSpeed: 4
+    chaseSpeed: 0
   timeRanges:
     idleTimer: {x: 1, y: 3}
     patrolTimer: {x: 10, y: 15}
-    searchTimer: {x: 6, y: 12}
-    searchIdleTimer: {x: 1, y: 3}
+    searchTimer: {x: 0, y: 0}
+    searchIdleTimer: {x: 0, y: 0}
   behaviour:
     attackCooldown: 2
-    isFriendly: 0
+    isFriendly: 1
