@@ -25,7 +25,7 @@ public class PlayerSword : MonoBehaviour
 
         Vector2 mouseDirection = (mousePosition - screenCenter).normalized; 
         //playerMove.OnAttack(true,mouseDirection);
-        StartCoroutine(ResetAttack(mouseDirection));
+        //StartCoroutine(ResetAttack(mouseDirection));
     }
 
     IEnumerator ResetAttack(Vector2 mouseDirection)
@@ -34,20 +34,21 @@ public class PlayerSword : MonoBehaviour
         //playerMove.OnAttack(false, mouseDirection);
     }
 
-    List<NonPlayerCharacter> GetEnemiesInRange(){
+    //Spawns an Physics.OverlapBox that checks for colliders
+    List<EnemyHealth> GetEnemiesInRange(){
         
         Vector3 spawnPosition = new Vector3(playerLocal.localPosition.x, playerLocal.localPosition.y, playerLocal.localPosition.z + 1);
         spawnPosition = playerLocal.TransformPoint(spawnPosition);
         Vector3 halfExtents = new Vector3(1, 1, 1); // Adjust the size of the box as needed
         Collider[] overlappedColliders = Physics.OverlapBox(spawnPosition, halfExtents, Quaternion.identity);
 
-        List<NonPlayerCharacter> enemyList = new List<NonPlayerCharacter>();
+        List<EnemyHealth> enemyList = new List<EnemyHealth>();
         foreach (Collider collider in overlappedColliders)
         {
-            NonPlayerCharacter npc = collider.GetComponent<NonPlayerCharacter>();
-            if (npc != null)
+            EnemyHealth enemy = collider.GetComponent<EnemyHealth>();
+            if (enemy != null)
             {
-                enemyList.Add(npc);
+                enemyList.Add(enemy);
             }
         }
         return enemyList;
@@ -55,12 +56,10 @@ public class PlayerSword : MonoBehaviour
         
     }
 
-    void HitEnemies(List<NonPlayerCharacter> enemies){
-        foreach (NonPlayerCharacter enemy in enemies)
+    void HitEnemies(List<EnemyHealth> enemies){
+        foreach (EnemyHealth enemy in enemies)
         {
-            //defeat NPC
-            Destroy(enemy);
-            
+            enemy.ApplyDamage(1);
         }
     }
 
