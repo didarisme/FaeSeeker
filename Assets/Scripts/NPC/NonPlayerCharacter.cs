@@ -48,9 +48,15 @@ public class NonPlayerCharacter : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
 
         if (TryGetComponent<Animator>(out Animator animator))
+        {
             characterAnimator = animator;
+            isAnimatorExist = true;
+        }
         else
+        {
             isAnimatorExist = false;
+            Debug.LogWarning("Animtor not found");
+        }
 
         stateMachine.Initialise();
     }

@@ -13,7 +13,7 @@ public class AttackState : BaseState
         npc.Agent.SetDestination(npc.transform.position);
         npc.Agent.speed = 0f;
         attackCooldown = npc.parameters.behaviour.attackCooldown;
-        damage = 1;
+        damage = npc.parameters.behaviour.attackDamage;
         timeElapsed = attackCooldown;
     }
 
