@@ -68,4 +68,8 @@ public class PlayerAnimation : MonoBehaviour
             animator.SetBool("IsCrouching", false);
         }
     }
+
+    public void Attack(){
+        //PLAY ATTACK ANIMATION HERE
+    }
 }

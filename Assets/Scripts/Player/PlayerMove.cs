@@ -56,6 +56,8 @@ public class PlayerMove : MonoBehaviour
     private Vector2 currentInput;
     public Vector2 CurrentInput { get => currentInput; }
     private float targetRotation;
+    private bool isAttacking;
+    private Vector2 attackRotation;
 
     private bool isSliding
     {
@@ -118,7 +120,7 @@ public class PlayerMove : MonoBehaviour
 
         float currentSpeed = new Vector2(characterController.velocity.x, characterController.velocity.z).magnitude;
         float targetSpeed = isCrouching ? crouchSpeed : IsSprinting ? sprintSpeed : walkSpeed;
-
+        
         if (currentInput == Vector2.zero)
         {
             targetSpeed = 0;
@@ -132,7 +134,9 @@ public class PlayerMove : MonoBehaviour
         {
             speed = targetSpeed;
         }
-
+        if(isAttacking){
+            speed = 0;
+        }
         Vector3 cameraForward;
         Vector3 cameraRight = Camera.main.transform.right;
 
@@ -147,10 +151,19 @@ public class PlayerMove : MonoBehaviour
         cameraForward.Normalize();
         cameraRight.Normalize();
 
-        Vector3 transformedInput = (currentInput.y * cameraForward) + (currentInput.x * cameraRight);
-
-        if (!isClimbingLadder)
+        //Calculate rotation
+        Vector3 transformedInput = Vector3.zero;
+        if(isAttacking){
+            transformedInput = (attackRotation.y * cameraForward) + (attackRotation.x * cameraRight);
+        }
+        else{
+            transformedInput = (currentInput.y * cameraForward) + (currentInput.x * cameraRight);
+        }
+        
+        if (!isClimbingLadder){
             targetRotation = Mathf.Atan2(transformedInput.x, transformedInput.z) * Mathf.Rad2Deg;
+        }
+
 
         float moveDirectionY = moveDirection.y;
         moveDirection = transformedInput * speed;
@@ -262,8 +275,13 @@ public class PlayerMove : MonoBehaviour
             moveDirection.y = -4f;
             slideDirection = Vector3.zero;
         }
-
-        OnMovement?.Invoke(currentInput * speed, targetRotation, isGrounded);
+        if(isAttacking){
+            OnMovement?.Invoke(attackRotation * 1, targetRotation, isGrounded);
+        }
+        else{
+            OnMovement?.Invoke(currentInput * speed, targetRotation, isGrounded);
+        }
+        
         characterController.Move(Time.deltaTime * moveDirection);
     }
 
@@ -315,5 +333,10 @@ public class PlayerMove : MonoBehaviour
         else Gizmos.color = transparentRed;
 
         Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y + GroundedOffset, transform.position.z), GroundedRadius);
+    }
+
+    public void SetAttack(Vector2 rotationXZ, bool attacking){
+        isAttacking = attacking;
+        attackRotation = rotationXZ;
     }
 }

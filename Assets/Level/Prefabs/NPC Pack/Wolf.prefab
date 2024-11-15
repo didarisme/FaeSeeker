@@ -3425,6 +3425,7 @@ GameObject:
   - component: {fileID: 5451869266936568841}
   - component: {fileID: 6582056819748407009}
   - component: {fileID: 2200987178470975010}
+  - component: {fileID: 4035977930677796295}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Untagged
@@ -3440,7 +3441,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3912599856242269554}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 19.048, y: 0, z: 25.894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8369,6 +8370,27 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!65 &4035977930677796295
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3912599856242269554}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.45, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &3939936310283053753
 GameObject:
   m_ObjectHideFlags: 0

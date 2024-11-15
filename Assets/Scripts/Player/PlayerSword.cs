@@ -5,36 +5,52 @@ using UnityEngine;
 public class PlayerSword : MonoBehaviour
 {
     [SerializeField]private Transform playerLocal;
+    public float attackCooldown = 1f;
+    public int attackDamage = 1;
+    private bool isAttacking = false;
+    PlayerMove playerMove;
+    [SerializeField] PlayerAnimation playerAnimation;
     void Awake()
     {
         playerMove = GetComponent<PlayerMove>();
+        playerAnimation = GetComponent<PlayerAnimation>();
     }
-    PlayerMove playerMove;
+    
     // Update is called once per frame
     void Update()
     {
         if(Input.GetMouseButtonDown(0)){
-            MouseDirection();
-            HitEnemies(GetEnemiesInRange());
+            if(!isAttacking){
+                isAttacking = true;
+                MouseDirection();
+                HitEnemies(GetEnemiesInRange());
+                if(playerAnimation!=null){
+                    playerAnimation.Attack();
+                }
+                StartCoroutine(AttackCooldown());
+            }
+            
         }
     }
 
     void MouseDirection(){
         Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
         Vector2 mousePosition = Input.mousePosition;
-
-        Vector2 mouseDirection = (mousePosition - screenCenter).normalized; 
-        //playerMove.OnAttack(true,mouseDirection);
-        //StartCoroutine(ResetAttack(mouseDirection));
+        Vector2 mouseDirection = (mousePosition - screenCenter).normalized;
+        if(playerMove!=null){
+            playerMove.SetAttack(mouseDirection, true); 
+        } 
+          
     }
 
-    IEnumerator ResetAttack(Vector2 mouseDirection)
+    IEnumerator AttackCooldown()
     {
-        yield return new WaitForSeconds(1.0f);
-        //playerMove.OnAttack(false, mouseDirection);
+        yield return new WaitForSeconds(attackCooldown);
+        isAttacking = false;
+        playerMove.SetAttack(Vector2.zero, false);
     }
 
-    //Spawns an Physics.OverlapBox that checks for colliders
+    //Spawns an Physics.OverlapBox that checks for Colliders that have EnemyHealth component
     List<EnemyHealth> GetEnemiesInRange(){
         
         Vector3 spawnPosition = new Vector3(playerLocal.localPosition.x, playerLocal.localPosition.y, playerLocal.localPosition.z + 1);
@@ -52,14 +68,12 @@ public class PlayerSword : MonoBehaviour
             }
         }
         return enemyList;
-        //SpawnCube(spawnPosition);
-        
     }
 
     void HitEnemies(List<EnemyHealth> enemies){
         foreach (EnemyHealth enemy in enemies)
         {
-            enemy.ApplyDamage(1);
+            enemy.ApplyDamage(attackDamage);
         }
     }
 
