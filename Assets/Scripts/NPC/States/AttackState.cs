@@ -64,8 +64,7 @@ public class AttackState : BaseState
         if (npc.isAnimatorExist)
             npc.CharacterAnimator.SetTrigger("OnAttack");
 
-        Debug.Log("I am attacking you!");
-
+        //Place attack below
         if (npc.Player.TryGetComponent<PlayerStats>(out PlayerStats playerStats))
             playerStats.OnTakeDamage(damage);
 

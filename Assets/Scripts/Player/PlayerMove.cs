@@ -53,11 +53,11 @@ public class PlayerMove : MonoBehaviour
 
     private Vector3 moveDirection;
     private Vector3 slideDirection;
+    private Vector2 attackDirection;
     private Vector2 currentInput;
     public Vector2 CurrentInput { get => currentInput; }
     private float targetRotation;
     private bool isAttacking;
-    private Vector2 attackRotation;
 
     private bool isSliding
     {
@@ -120,23 +120,16 @@ public class PlayerMove : MonoBehaviour
 
         float currentSpeed = new Vector2(characterController.velocity.x, characterController.velocity.z).magnitude;
         float targetSpeed = isCrouching ? crouchSpeed : IsSprinting ? sprintSpeed : walkSpeed;
-        
-        if (currentInput == Vector2.zero)
-        {
-            targetSpeed = 0;
-        }
+
+        if (currentInput == Vector2.zero) targetSpeed = 0;
 
         if (currentSpeed < targetSpeed - 0.1f)
-        {
             speed = Mathf.SmoothDamp(speed, targetSpeed, ref currentVelocity, smoothTime);
-        }
         else
-        {
             speed = targetSpeed;
-        }
-        if(isAttacking){
-            speed = 0;
-        }
+
+        if (isAttacking) speed = 0;
+
         Vector3 cameraForward;
         Vector3 cameraRight = Camera.main.transform.right;
 
@@ -152,18 +145,13 @@ public class PlayerMove : MonoBehaviour
         cameraRight.Normalize();
 
         //Calculate rotation
-        Vector3 transformedInput = Vector3.zero;
-        if(isAttacking){
-            transformedInput = (attackRotation.y * cameraForward) + (attackRotation.x * cameraRight);
-        }
-        else{
-            transformedInput = (currentInput.y * cameraForward) + (currentInput.x * cameraRight);
-        }
-        
-        if (!isClimbingLadder){
-            targetRotation = Mathf.Atan2(transformedInput.x, transformedInput.z) * Mathf.Rad2Deg;
-        }
+        Vector3 transformedInput = (currentInput.y * cameraForward) + (currentInput.x * cameraRight);
 
+        if (isAttacking)
+            transformedInput = (attackDirection.y * cameraForward) + (attackDirection.x * cameraRight);
+
+        if (!isClimbingLadder)
+            targetRotation = Mathf.Atan2(transformedInput.x, transformedInput.z) * Mathf.Rad2Deg;
 
         float moveDirectionY = moveDirection.y;
         moveDirection = transformedInput * speed;
@@ -275,13 +263,12 @@ public class PlayerMove : MonoBehaviour
             moveDirection.y = -4f;
             slideDirection = Vector3.zero;
         }
-        if(isAttacking){
-            OnMovement?.Invoke(attackRotation * 1, targetRotation, isGrounded);
-        }
-        else{
+
+        if (!isAttacking)
             OnMovement?.Invoke(currentInput * speed, targetRotation, isGrounded);
-        }
-        
+        else
+            OnMovement?.Invoke(attackDirection * 1, targetRotation, isGrounded);
+
         characterController.Move(Time.deltaTime * moveDirection);
     }
 
@@ -335,8 +322,9 @@ public class PlayerMove : MonoBehaviour
         Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y + GroundedOffset, transform.position.z), GroundedRadius);
     }
 
-    public void SetAttack(Vector2 rotationXZ, bool attacking){
-        isAttacking = attacking;
-        attackRotation = rotationXZ;
+    public void SetAttack(Vector2 direction, bool newBool)
+    {
+        isAttacking = newBool;
+        attackDirection = direction;
     }
 }

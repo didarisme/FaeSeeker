@@ -47,6 +47,7 @@ public class PlayerStats : MonoBehaviour
 
     public void KillPlayer()
     {
-        gameManager.EndGame();
+        if (gameManager != null)
+            gameManager.EndGame();
     }
 }

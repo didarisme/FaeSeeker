@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d37a631bae23247208a3a927fbab5da3
+guid: 9d93152bd315e4ac8a7400bf2c6b225d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -40,19 +40,19 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Great Sword Idle
+      name: Great Sword Slash
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 60
+      lastFrame: 55
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 1

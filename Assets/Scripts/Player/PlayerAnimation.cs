@@ -69,7 +69,8 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-    public void Attack(){
-        //PLAY ATTACK ANIMATION HERE
+    public void PlayAttack()
+    {
+        animator.SetTrigger("Attack");
     }
 }
