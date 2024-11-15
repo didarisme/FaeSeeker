@@ -6,7 +6,9 @@ public class ChaseState : BaseState
     {
         npc.Agent.SetDestination(npc.Player.position);
         npc.Agent.speed = npc.parameters.movement.chaseSpeed;
-        npc.CharacterAnimator.SetBool("isChasing", true);
+
+        if (npc.isAnimatorExist)
+            npc.CharacterAnimator.SetBool("isChasing", true);
     }
 
     public override void Perform()
@@ -22,12 +24,15 @@ public class ChaseState : BaseState
         {
             npc.LastKnowPos = npc.Player.position;
             stateMachine.ChangeState(new SearchState());
-            npc.CharacterAnimator.SetBool("isChasing", false);
+
+            if (npc.isAnimatorExist)
+                npc.CharacterAnimator.SetBool("isChasing", false);
         }
     }
 
     public override void Exit()
     {
-        npc.CharacterAnimator.SetBool("isChasing", false);
+        if (npc.isAnimatorExist)
+            npc.CharacterAnimator.SetBool("isChasing", false);
     }
 }

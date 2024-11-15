@@ -21,6 +21,7 @@ public class NonPlayerCharacter : MonoBehaviour
     private NavMeshAgent agent;
     private Transform player;
     private Animator characterAnimator;
+    public bool isAnimatorExist;
 
     public NavMeshAgent Agent { get => agent; }
     public Transform Player { get => player; }
@@ -45,7 +46,12 @@ public class NonPlayerCharacter : MonoBehaviour
         playerMove = player.GetComponent<PlayerMove>();
 
         agent = GetComponent<NavMeshAgent>();
-        characterAnimator = GetComponentInChildren<Animator>();
+
+        if (TryGetComponent<Animator>(out Animator animator))
+            characterAnimator = animator;
+        else
+            isAnimatorExist = false;
+
         stateMachine.Initialise();
     }
 

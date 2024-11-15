@@ -20,8 +20,8 @@ MonoBehaviour:
     patrolSpeed: 2
     chaseSpeed: 0
   timeRanges:
-    idleTimer: {x: 1, y: 3}
-    patrolTimer: {x: 10, y: 15}
+    idleTimer: {x: 0, y: 0}
+    patrolTimer: {x: 3000, y: 5000}
     searchTimer: {x: 0, y: 0}
     searchIdleTimer: {x: 0, y: 0}
   behaviour:

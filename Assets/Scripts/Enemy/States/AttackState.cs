@@ -60,7 +60,9 @@ public class AttackState : BaseState
     {
         timeElapsed = 0;
         isAttacking = true;
-        npc.CharacterAnimator.SetTrigger("OnAttack");
+
+        if (npc.isAnimatorExist)
+            npc.CharacterAnimator.SetTrigger("OnAttack");
 
         Debug.Log("I am attacking you!");
 
@@ -74,7 +76,9 @@ public class AttackState : BaseState
     {
         if (npc.Agent.remainingDistance < 0.1f || npc.PlayerDistance > 2f)
         {
-            npc.CharacterAnimator.SetBool("isPatrolling", false);
+            if (npc.isAnimatorExist)
+                npc.CharacterAnimator.SetBool("isPatrolling", false);
+
             stateMachine.ChangeState(new ChaseState());
         }
     }
@@ -94,7 +98,8 @@ public class AttackState : BaseState
             npc.Agent.SetDestination(npc.transform.position + newDestination + randomSpread);
             npc.Agent.speed = 1.5f;
 
-            npc.CharacterAnimator.SetBool("isPatrolling", true);
+            if (npc.isAnimatorExist)
+                npc.CharacterAnimator.SetBool("isPatrolling", true);
         }
     }
 

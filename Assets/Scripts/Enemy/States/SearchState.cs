@@ -11,7 +11,9 @@ public class SearchState : BaseState
 
     public override void Enter()
     {
-        npc.CharacterAnimator.SetBool("isPatrolling", true);
+        if (npc.isAnimatorExist)
+            npc.CharacterAnimator.SetBool("isPatrolling", true);
+
         npc.Agent.SetDestination(npc.LastKnowPos);
         npc.Agent.speed = npc.parameters.movement.patrolSpeed;
 
@@ -35,7 +37,8 @@ public class SearchState : BaseState
         {
             moveTimeElapsed += Time.deltaTime;
 
-            npc.CharacterAnimator.SetBool("isPatrolling", false);
+            if (npc.isAnimatorExist)
+                npc.CharacterAnimator.SetBool("isPatrolling", false);
 
             if (moveTimeElapsed > idleTimer)
             {
@@ -59,6 +62,7 @@ public class SearchState : BaseState
     public override void Exit()
     {
         //Debug.Log("Exit!");
-        npc.CharacterAnimator.SetBool("isPatrolling", false);
+        if (npc.isAnimatorExist)
+            npc.CharacterAnimator.SetBool("isPatrolling", false);
     }
 }

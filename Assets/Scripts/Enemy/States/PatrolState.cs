@@ -9,7 +9,9 @@ public class PatrolState : BaseState
 
     public override void Enter()
     {
-        npc.CharacterAnimator.SetBool("isPatrolling", true);
+        if (npc.isAnimatorExist)
+            npc.CharacterAnimator.SetBool("isPatrolling", true);
+
         npc.Agent.speed = npc.parameters.movement.patrolSpeed;
 
         Vector2 timeRange = npc.parameters.timeRanges.patrolTimer;
@@ -48,7 +50,8 @@ public class PatrolState : BaseState
 
     public override void Exit()
     {
-        npc.CharacterAnimator.SetBool("isPatrolling", false);
+        if (npc.isAnimatorExist)
+            npc.CharacterAnimator.SetBool("isPatrolling", false);
     }
 
     private void PatrolCycle()
@@ -63,7 +66,7 @@ public class PatrolState : BaseState
 
             npc.LastPatrolPoint = npc.Agent.destination;
 
-            CheckForIdle();
+            CheckForIdle(0.5f);
         }
         else if (!isRandomPath && npc.Agent.remainingDistance < 0.1f)
         {
@@ -74,7 +77,7 @@ public class PatrolState : BaseState
 
             npc.Agent.SetDestination(npc.path.wayPoints[npc.WaypointIndex].position);
 
-            CheckForIdle();
+            CheckForIdle(-1f);
         }
 
         if (timeElapsed > patrolTimer)
@@ -83,12 +86,12 @@ public class PatrolState : BaseState
         }
     }
 
-    private void CheckForIdle()
+    private void CheckForIdle(float chance)
     {
         float idleChance = Random.value;
         //Debug.Log("Chance for idle: " + idleChance);
 
-        if (idleChance <= 0.5f)
+        if (idleChance <= chance)
             stateMachine.ChangeState(new IdleState());
     }
 }
