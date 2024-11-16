@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -41,9 +42,9 @@ public class PlayerAttack : MonoBehaviour
 
     private void AttackDirection()
     {
-        Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+        Vector2 playerOnScreen = Camera.main.WorldToScreenPoint(transform.position);
         Vector2 mousePosition = Input.mousePosition;
-        Vector2 mouseDirection = (mousePosition - screenCenter).normalized;
+        Vector2 mouseDirection = (mousePosition - playerOnScreen).normalized;
 
         if (playerMove != null)
             playerMove.SetAttack(mouseDirection, true);
@@ -61,7 +62,7 @@ public class PlayerAttack : MonoBehaviour
 
         float timeElapsed = 0;
 
-        while (timeElapsed < attackCooldown / 3)
+        while (timeElapsed < attackCooldown * 0.4f)
         {
             timeElapsed += Time.deltaTime;
             yield return null;
