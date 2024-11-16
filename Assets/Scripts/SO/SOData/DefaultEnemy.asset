@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultEnemy
   m_EditorClassIdentifier: 
   detection:
-    viewDistance: 10
+    viewDistance: 6
     fieldOfView: 85
     hearDistance: 5
   movement:
