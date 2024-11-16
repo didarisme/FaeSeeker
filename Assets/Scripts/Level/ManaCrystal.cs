@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class TestIneraction : Interactable
+public class ManaCrystal : Interactable
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] private float amplitude = 0.2f;
