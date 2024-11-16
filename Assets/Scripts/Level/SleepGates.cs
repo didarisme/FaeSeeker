@@ -45,7 +45,6 @@ public class SleepGates : MonoBehaviour
             activePlates--;
         }
 
-        // Проверяем, все ли плиты активированы
         bool shouldOpenGate = activePlates == plates.Length;
 
         if (shouldOpenGate)

@@ -1,10 +1,10 @@
 using System.Collections;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Transform playerLocal;
+    [SerializeField] private KeyCode attackKey = KeyCode.Mouse0;
     [SerializeField] private float attackCooldown = 1f;
     [SerializeField] private float attackRadius, attackAngle;
     [SerializeField] private int damage = 1;
@@ -22,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(attackKey))
         {
             TryToAttack();
         }

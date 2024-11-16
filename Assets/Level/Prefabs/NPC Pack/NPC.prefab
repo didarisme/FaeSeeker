@@ -1581,7 +1581,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 5
-  dustPrefab: {fileID: 7288677302734727727, guid: 8671cc436f0be4d61a5f93445254d20e, type: 3}
+  dustPrefab: {fileID: 7979608085281784206, guid: cd4deda991caa4ed18b59f7137976f51, type: 3}
+  damageEffect: {fileID: 7288677302734727727, guid: 8671cc436f0be4d61a5f93445254d20e, type: 3}
 --- !u!1 &4681702730502130384
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,14 +3,13 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int enemyHealth = 5;
-    [SerializeField] private GameObject dustPrefab;
+    [SerializeField] private GameObject dustPrefab, damageEffect;
 
     private NonPlayerCharacter npc;
-    private ParticleSystem particles;
+
     private void Start()
     {
         npc = GetComponent<NonPlayerCharacter>();
-        particles = GetComponent<ParticleSystem>();
         enemyHealth = npc.parameters.behaviour.health;
     }
 
@@ -23,22 +22,15 @@ public class EnemyHealth : MonoBehaviour
             enemyHealth = 0;
             Kill();
         }
-
-        Debug.Log(gameObject.name + " health: " + enemyHealth + " / Current damage: " + damageValue);
-        DrawBlood();
+        else
+        {
+            Instantiate(damageEffect, transform.position + Vector3.up, transform.rotation);
+        }
     }
 
     private void Kill()
     {
         Instantiate(dustPrefab, transform.position + (Vector3.up / 2), transform.rotation);
         Destroy(gameObject);
-    }
-
-    private void DrawBlood(){
-        if(particles!=null){
-            particles.Stop();
-            particles.Clear();
-            particles.Play();
-        }
     }
 }

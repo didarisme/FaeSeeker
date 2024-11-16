@@ -3,10 +3,10 @@ using UnityEngine.Events;
 
 public class MethodInvoker : MonoBehaviour
 {
-    [SerializeField] private UnityEvent methodToInvoke;
+    public UnityEvent MethodToInvoke;
 
     public void InvokeThisMethod()
     {
-        methodToInvoke.Invoke();
+        MethodToInvoke?.Invoke();
     }
 }

@@ -8,4 +8,9 @@ public class SceneChanger : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(sceneInd);
     }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

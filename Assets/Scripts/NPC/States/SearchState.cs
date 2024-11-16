@@ -47,7 +47,8 @@ public class SearchState : BaseState
 
                 //Debug.Log("New Point " + npc.Agent.destination);
 
-                npc.CharacterAnimator.SetBool("isPatrolling", true);
+                if (npc.isAnimatorExist)
+                    npc.CharacterAnimator.SetBool("isPatrolling", true);
 
                 idleTimer = Random.Range(idleTimeRange.x, idleTimeRange.y);
                 moveTimeElapsed = 0;

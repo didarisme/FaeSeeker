@@ -4,19 +4,35 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject fadeIn;
 
+    private PlayerAttack playerAttack;
+    private Animator pauseAnimator;
+
+    private void Awake()
+    {
+        pauseAnimator = GetComponentInChildren<Animator>();
+        playerAttack = FindObjectOfType<PlayerAttack>();
+    }
+
     private void OnEnable()
     {
+        playerAttack.enabled = false;
         Time.timeScale = 0;
     }
 
-    public void ContinueBtn()
+    public void NoBtn()
     {
-        gameObject.SetActive(false);
-        Time.timeScale = 1f;
+        pauseAnimator.SetTrigger("OnPauseEnd");
     }
 
-    public void ExitLevelBtn()
+    public void YesBtn()
     {
         fadeIn.SetActive(true);
+    }
+
+    public void ClosePauseMenu()
+    {
+        playerAttack.enabled = true;
+        gameObject.SetActive(false);
+        Time.timeScale = 1f;
     }
 }
