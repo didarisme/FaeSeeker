@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionDistance: 20
+  playerDistance: 2
   interactionLayer:
     serializedVersion: 2
     m_Bits: 256

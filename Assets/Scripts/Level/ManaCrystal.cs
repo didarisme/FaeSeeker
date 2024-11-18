@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class ManaCrystal : Interactable
 {
+    [SerializeField] private string hoverName;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float amplitude = 0.2f;
     [SerializeField] private float collectSpeed = 1f;
-    private Collider coll;
+
+    private Collider manaCollider;
     private float defaultYPos;
     private float timer;
 
@@ -14,6 +16,7 @@ public class ManaCrystal : Interactable
 
     private void Start()
     {
+        manaCollider = GetComponent<Collider>();
         defaultYPos = transform.position.y;
         outline = GetComponent<Outline>();
         outline.enabled = false;
@@ -26,23 +29,22 @@ public class ManaCrystal : Interactable
 
     public override void OnFocus()
     {
-        Debug.Log("Focus on " + gameObject.name);
+        HoverText.OnHoverText?.Invoke(hoverName);
         outline.enabled = true;
     }
 
     public override void OnInteract()
     {
-        if (coll == null)
+        if (manaCollider.enabled)
         {
-            coll = GetComponent<Collider>();
-            coll.enabled = false;
+            manaCollider.enabled = false;
             StartCoroutine(Collect());
         }
     }
 
     public override void OnLoseFocus()
     {
-        Debug.Log("Lose focus from " + gameObject.name);
+        HoverText.OnHoverText?.Invoke(null);
         outline.enabled = false;
     }
 
@@ -52,7 +54,7 @@ public class ManaCrystal : Interactable
 
         transform.Rotate(0, 10f * speed * Time.deltaTime, 0);
 
-        if (coll != null) return;
+        if (manaCollider != null) return;
 
         transform.position = new Vector3(transform.position.x, defaultYPos + Mathf.PingPong(timer * amplitude, amplitude), transform.position.z);
     }

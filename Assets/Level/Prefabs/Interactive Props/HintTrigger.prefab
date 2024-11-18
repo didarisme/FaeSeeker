@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 3218297460788740055}
   - component: {fileID: 2758830677713682285}
   - component: {fileID: 2068394988148223353}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HintTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

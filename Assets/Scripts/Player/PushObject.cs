@@ -63,7 +63,7 @@ public class PushObject : MonoBehaviour
 
             objectRigidbody.AddForceAtPosition(forceDirection.normalized * pushPower, transform.position, ForceMode.Impulse);
 
-            anim.SetBool("isPushing", true);
+            anim.SetBool("IsPushing", true);
 
             if (playerCamera != null)
                 playerCamera.SetUpdateMode(false);
@@ -80,6 +80,6 @@ public class PushObject : MonoBehaviour
         if (playerCamera != null)
             playerCamera.SetUpdateMode(true);
 
-        anim.SetBool("isPushing", false);
+        anim.SetBool("IsPushing", false);
     }
 }

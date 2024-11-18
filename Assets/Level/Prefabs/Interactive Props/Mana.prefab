@@ -246,6 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55258182b585c244782be34408e65c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverName: Mana crystal
   speed: 3
   amplitude: 0.2
   collectSpeed: 1

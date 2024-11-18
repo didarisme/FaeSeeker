@@ -1,16 +1,16 @@
-using System;
 using UnityEngine;
 
 public class Interaction : MonoBehaviour
 {
     [Header("Interaction")]
-    [SerializeField] private float interactionDistance = default;
+    [SerializeField] private float interactionDistance = 20f;
+    [SerializeField] private float playerDistance = 2f;
     [SerializeField] private LayerMask interactionLayer = default;
-    private Interactable currentInteractable;
-    public static Action<bool> IsOnFocus;
 
     [Header("Controls")]
     [SerializeField] private KeyCode interactKey = KeyCode.Mouse0;
+
+    private Interactable currentInteractable;
 
     private void Update()
     {
@@ -25,19 +25,21 @@ public class Interaction : MonoBehaviour
             // 8 - Interactable layer
             if (currentInteractable == null || hit.collider.gameObject.GetInstanceID() != currentInteractable.gameObject.GetInstanceID())
             {
+                if (currentInteractable)
+                {
+                    currentInteractable.OnLoseFocus();
+                    currentInteractable = null; 
+                }
+
                 hit.collider.TryGetComponent(out currentInteractable);
 
                 if (currentInteractable)
-                {
                     currentInteractable.OnFocus();
-                    IsOnFocus?.Invoke(true);
-                }
             }
         }
         else if (currentInteractable)
         {
             currentInteractable.OnLoseFocus();
-            IsOnFocus?.Invoke(false);
             currentInteractable = null;
         }
     }
@@ -46,7 +48,12 @@ public class Interaction : MonoBehaviour
     {
         if (Input.GetKeyDown(interactKey) && currentInteractable != null && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, interactionDistance, interactionLayer))
         {
-            currentInteractable.OnInteract();
+            Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
+            if (Vector3.Distance(playerTransform.position, currentInteractable.transform.position) < playerDistance)
+                currentInteractable.OnInteract();
+            else
+                HoverText.OnHoverText?.Invoke("Too far");
         }
     }
 }

@@ -92,6 +92,9 @@ public class HintPanel : MonoBehaviour
 
     private void BlockMovement(bool isDisabled)
     {
+        if (isDisabled)
+            player.GetComponentInChildren<PlayerAnimation>().ResetAnimations();
+
         player.GetComponent<PlayerMove>().enabled = !isDisabled;
         player.GetComponent<PlayerAttack>().enabled = !isDisabled;
     }

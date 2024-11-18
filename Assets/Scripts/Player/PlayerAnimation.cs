@@ -4,7 +4,7 @@ public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] private float rotationSmoothTime = 0.5f;
 
-    private float rotationVelocity = 0;
+    private float rotationVelocity = 0f;
     private float speed;
 
     private PlayerMove playerMove;
@@ -38,7 +38,7 @@ public class PlayerAnimation : MonoBehaviour
         {
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref rotationVelocity, rotationSmoothTime);
 
-            transform.rotation = Quaternion.Euler(0, rotation, 0);
+            transform.rotation = Quaternion.Euler(0f, rotation, 0f);
         }
 
         Vector2 playerPos = new Vector2(transform.position.x, transform.position.z);
@@ -72,5 +72,13 @@ public class PlayerAnimation : MonoBehaviour
     public void PlayAttack()
     {
         animator.SetTrigger("Attack");
+    }
+
+    public void ResetAnimations()
+    {
+        speed = 0f;
+        animator.SetFloat("Speed", speed);
+        animator.SetBool("IsCrouching", false);
+        animator.SetBool("isOushing", false);
     }
 }

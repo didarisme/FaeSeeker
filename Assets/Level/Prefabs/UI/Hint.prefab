@@ -239,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   textField: {fileID: 613856006338053607}
-  showOnStart: 0
+  showOnStart: 1
 --- !u!1 &8629550525019581476
 GameObject:
   m_ObjectHideFlags: 0
