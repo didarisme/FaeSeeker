@@ -50,4 +50,10 @@ public class PlayerStats : MonoBehaviour
         if (gameManager != null)
             gameManager.EndGame();
     }
+
+    public void AddMana(int manaAmount){
+        currentMana += manaAmount;
+        currentMana = Mathf.Clamp(currentMana, 0, maxMana);
+        print("Added mana");
+    }
 }
