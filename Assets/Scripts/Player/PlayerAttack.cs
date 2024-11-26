@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Transform playerLocal;
-    [SerializeField] private KeyCode attackKey = KeyCode.Mouse0;
     [SerializeField] private float attackCooldown = 1f;
     [SerializeField] private float attackRadius, attackAngle;
     [SerializeField] private int damage = 1;
@@ -19,16 +18,8 @@ public class PlayerAttack : MonoBehaviour
         playerMove = GetComponent<PlayerMove>();
         playerAnimation = GetComponentInChildren<PlayerAnimation>();
     }
-    
-    private void Update()
-    {
-        if (Input.GetKeyDown(attackKey))
-        {
-            TryToAttack();
-        }
-    }
 
-    private void TryToAttack()
+    public void TryToAttack()
     {
         if (isAttacking) return;
 
