@@ -184,6 +184,37 @@ Transform:
   - {fileID: 3152010116602546086}
   m_Father: {fileID: 7643104137776401299}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &771998457351099500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4229857752171249431}
+  m_Layer: 6
+  m_Name: FireballSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4229857752171249431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771998457351099500}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.563, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5752008699237478075}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &900026951529445320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,6 +1108,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1128106713905714661}
+  - {fileID: 4229857752171249431}
   m_Father: {fileID: 4130211622888998003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4792968787013521214
@@ -2223,6 +2255,7 @@ GameObject:
   - component: {fileID: 8770389641718274054}
   - component: {fileID: 143867406266324313}
   - component: {fileID: 5213735697887964834}
+  - component: {fileID: 2329624826766633319}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -2353,6 +2386,23 @@ MonoBehaviour:
   attackRadius: 1.5
   attackAngle: 100
   damage: 1
+--- !u!114 &2329624826766633319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8328621089250633433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bf3649c497be8f45accdc13cd9e67dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLocal: {fileID: 0}
+  currentForm: 1
+  fireballFactory: {fileID: 0}
+  attack: {fileID: 5213735697887964834}
+  attackKey: 323
 --- !u!1 &8348093073456778737
 GameObject:
   m_ObjectHideFlags: 0
