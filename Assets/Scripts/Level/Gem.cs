@@ -7,8 +7,9 @@ public abstract class Gem : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private float amplitude = 0.2f;
     [SerializeField] private float collectSpeed = 1f;
+ 
     private float timer = 0;
-    private float defaultYPos;
+    [SerializeField] private float defaultYPos;
 
     // Update is called once per frame
     void Update()
