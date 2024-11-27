@@ -8,7 +8,8 @@ public class DaxForms : MonoBehaviour
     public enum FormType
     {
         Magical,
-        Physical
+        Physical,
+        Neutral
     }
     [SerializeField] private Transform playerLocal;
     [SerializeField]private FormType currentForm = FormType.Physical;
@@ -32,7 +33,6 @@ public class DaxForms : MonoBehaviour
             print("Pressing attack");
             currentAction?.Invoke();
         }
-        
     }
 
     void MagicInput()
@@ -56,6 +56,9 @@ public class DaxForms : MonoBehaviour
                 break;
             case FormType.Physical:
                 currentAction = PhysicalInput;
+                break;
+            case FormType.Neutral:
+                currentAction = null;
                 break;
         }
     } 

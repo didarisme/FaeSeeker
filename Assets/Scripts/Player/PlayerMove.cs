@@ -128,7 +128,7 @@ public class PlayerMove : MonoBehaviour
         else
             speed = targetSpeed;
 
-        if (isAttacking) speed = 0;
+        //if (isAttacking) speed = 0;
 
         Vector3 cameraForward;
         Vector3 cameraRight = Camera.main.transform.right;

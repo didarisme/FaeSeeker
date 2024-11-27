@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 125083684}
   - component: {fileID: 125083686}
   - component: {fileID: 125083687}
+  - component: {fileID: 125083688}
   m_Layer: 0
   m_Name: Managers&Controllers
   m_TagString: Untagged
@@ -207,6 +208,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be170e93c1f0546d68d471b47732ef30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &125083688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125083683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d247de1ea04fc42b052bcdf168d66a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneChoice: puzzle playground
 --- !u!1 &164899674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1905,16 +1919,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 125083684}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: PlayButton
-        m_Mode: 1
+      - m_Target: {fileID: 125083688}
+        m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: puzzle playground
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &663936669

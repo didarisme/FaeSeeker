@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Level/Scenes/MainMenuFolder/MainMenu.unity
     guid: 16f8f4a4534481349b013d1fbf1b5d51
-  - enabled: 1
+  - enabled: 0
     path: Assets/Level/Scenes/DemoSceneFolder/DemoScene.unity
     guid: 9b1c3d90a634a4e5cb15feda3dd9f612
+  - enabled: 1
+    path: Assets/Level/Scenes/Simon-Scenes/puzzle playground.unity
+    guid: ab656779e347b7e4daa9c78fbde6e2d1
   m_configObjects: {}

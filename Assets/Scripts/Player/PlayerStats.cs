@@ -54,12 +54,16 @@ public class PlayerStats : MonoBehaviour
     public void AddMana(int manaAmount){
         currentMana += manaAmount;
         currentMana = Mathf.Clamp(currentMana, 0, maxMana);
-        print("Added mana");
+        //print("Added mana");
+        if (playerStatsUI != null)
+            playerStatsUI.UpdateManaUI(currentMana);
     }
 
     public void AddHealth(int healthAmount){
         currentHealth += healthAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        print("Added health");
+        //print("Added health");
+        if (playerStatsUI != null)
+            playerStatsUI.UpdateHealthUI(currentHealth);
     }
 }
