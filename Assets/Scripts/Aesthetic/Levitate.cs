@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Levitate : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float speed = 1f;
     [SerializeField] private float amplitude = 0.2f;
     [SerializeField] private float yOffset;
  
@@ -23,7 +23,7 @@ public class Levitate : MonoBehaviour
     }
     private void Levitation()
     {
-        timer += Time.deltaTime;
+        timer += Time.deltaTime * speed;
 
         transform.position = new Vector3(transform.position.x, yOffset + Mathf.PingPong(timer * amplitude, amplitude), transform.position.z);
     }

@@ -8,12 +8,12 @@ public class PlayerStats : MonoBehaviour
     private int currentHealth, currentMana;
 
     private PlayerStatsUI playerStatsUI;
-    private GameManager gameManager;
+    private PauseManager gameManager;
 
     private void Start()
     {
         playerStatsUI = FindObjectOfType<PlayerStatsUI>();
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = FindObjectOfType<PauseManager>();
         currentHealth = maxHealth;
         currentMana = maxMana;
     }
