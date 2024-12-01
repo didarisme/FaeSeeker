@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 6052222150102418862}
   - component: {fileID: 3757974603293992247}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: PauseManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
