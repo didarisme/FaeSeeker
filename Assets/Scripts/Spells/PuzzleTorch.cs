@@ -6,12 +6,15 @@ using UnityEngine;
 
 public class PuzzleTorch : MonoBehaviour
 {
+    [SerializeField]TorchGate torchGate;
     [SerializeField]Light torchLight;
     [SerializeField]ParticleSystem particles;
     private bool activated = false;
-    // Start is called before the first frame update
+
     void Start()
     {
+        //print(torchGate.gameObject.name);
+        torchGate.RegisterTorch(this);
         LightSwitch(false);
     }
 
@@ -22,14 +25,23 @@ public class PuzzleTorch : MonoBehaviour
             LightSwitch(true);
         }
     }
-    public void LightSwitch(bool onoff){
-        torchLight.enabled = onoff;
+    public void LightSwitch(bool onoff){ 
         if(onoff){
             particles.Play();
         }
         else{
             particles.Stop();
         }
-        activated = false;
+        activated = onoff;
+        torchLight.enabled = onoff;
+        NotifyDoor();
+    }
+
+    public void NotifyDoor(){
+        torchGate.CheckTorches();
+    }
+
+    public bool IsActive(){
+        return activated;
     }
 }
