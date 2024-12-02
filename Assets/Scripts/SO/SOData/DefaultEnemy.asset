@@ -15,7 +15,7 @@ MonoBehaviour:
   detection:
     viewDistance: 6
     fieldOfView: 85
-    hearDistance: 5
+    hearDistance: 3.5
   movement:
     patrolSpeed: 2
     chaseSpeed: 4
