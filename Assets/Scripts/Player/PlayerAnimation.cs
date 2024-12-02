@@ -79,6 +79,6 @@ public class PlayerAnimation : MonoBehaviour
         speed = 0f;
         animator.SetFloat("Speed", speed);
         animator.SetBool("IsCrouching", false);
-        animator.SetBool("isOushing", false);
+        animator.SetBool("IsPushing", false);
     }
 }

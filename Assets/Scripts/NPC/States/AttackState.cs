@@ -66,7 +66,7 @@ public class AttackState : BaseState
 
         //Place attack below
         if (npc.Player.TryGetComponent<PlayerStats>(out PlayerStats playerStats))
-            playerStats.OnTakeDamage(damage);
+            playerStats.OnHealth(-damage);
 
         npc.StartCoroutine(ResetAttack());
     }

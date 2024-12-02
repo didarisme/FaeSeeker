@@ -96,6 +96,6 @@ public class HintPanel : MonoBehaviour
             player.GetComponentInChildren<PlayerAnimation>().ResetAnimations();
 
         player.GetComponent<PlayerMove>().enabled = !isDisabled;
-        player.GetComponent<PlayerAttack>().enabled = !isDisabled;
+        player.GetComponent<DaxForms>().enabled = !isDisabled;
     }
 }

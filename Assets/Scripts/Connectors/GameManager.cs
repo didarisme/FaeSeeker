@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [Header("Links")]
     [SerializeField] private GameObject pauseMenu;

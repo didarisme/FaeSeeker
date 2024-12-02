@@ -8,19 +8,19 @@ public class PlayerStats : MonoBehaviour
     private int currentHealth, currentMana;
 
     private PlayerStatsUI playerStatsUI;
-    private PauseManager gameManager;
+    private GameManager gameManager;
 
     private void Start()
     {
         playerStatsUI = FindObjectOfType<PlayerStatsUI>();
-        gameManager = FindObjectOfType<PauseManager>();
+        gameManager = FindObjectOfType<GameManager>();
         currentHealth = maxHealth;
         currentMana = maxMana;
     }
 
-    public void OnTakeDamage(int damageAmount)
+    public void OnHealth(int increaseAmount)
     {
-        currentHealth -= damageAmount;
+        currentHealth += increaseAmount;
 
         if (currentHealth <= 0)
         {
@@ -34,9 +34,9 @@ public class PlayerStats : MonoBehaviour
             playerStatsUI.UpdateHealthUI(currentHealth);
     }
 
-    public bool OnManaUse(int manaAmount)
+    public bool OnMana(int increaseAmount)
     {
-        currentMana -= manaAmount;
+        currentMana += increaseAmount;
         currentMana = Mathf.Clamp(currentMana, 0, maxMana);
 
         if (playerStatsUI != null)
@@ -49,21 +49,5 @@ public class PlayerStats : MonoBehaviour
     {
         if (gameManager != null)
             gameManager.EndGame();
-    }
-
-    public void AddMana(int manaAmount){
-        currentMana += manaAmount;
-        currentMana = Mathf.Clamp(currentMana, 0, maxMana);
-        //print("Added mana");
-        if (playerStatsUI != null)
-            playerStatsUI.UpdateManaUI(currentMana);
-    }
-
-    public void AddHealth(int healthAmount){
-        currentHealth += healthAmount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        //print("Added health");
-        if (playerStatsUI != null)
-            playerStatsUI.UpdateHealthUI(currentHealth);
     }
 }

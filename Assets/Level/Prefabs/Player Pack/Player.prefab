@@ -2319,7 +2319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canSprint: 1
   canJump: 1
-  canCrouch: 0
+  canCrouch: 1
   sprintKey: 304
   jumpKey: 32
   crouchKey: 306
@@ -2352,7 +2352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0534481c3e949f244ae13a2b21403208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushPower: 5
+  pushPower: 1
   offset: 0.3
   playerCamera: {fileID: 0}
 --- !u!114 &143867406266324313

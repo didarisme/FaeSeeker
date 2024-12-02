@@ -4,18 +4,18 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject fadeIn;
 
-    private PlayerAttack playerAttack;
+    private DaxForms daxForms;
     private Animator pauseAnimator;
 
     private void Awake()
     {
         pauseAnimator = GetComponentInChildren<Animator>();
-        playerAttack = FindObjectOfType<PlayerAttack>();
+        daxForms = FindObjectOfType<DaxForms>();
     }
 
     private void OnEnable()
     {
-        playerAttack.enabled = false;
+        daxForms.enabled = false;
         Time.timeScale = 0;
     }
 
@@ -31,7 +31,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ClosePauseMenu()
     {
-        playerAttack.enabled = true;
+        daxForms.enabled = true;
         gameObject.SetActive(false);
         Time.timeScale = 1f;
     }

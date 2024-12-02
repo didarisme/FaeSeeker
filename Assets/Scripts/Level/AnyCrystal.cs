@@ -1,18 +1,29 @@
 using System.Collections;
 using UnityEngine;
 
-public class ManaCrystal : Interactable
+public class AnyCrystal : Interactable
 {
+    [Header("Gameplay")]
     [SerializeField] private string hoverName;
+    [SerializeField] private CrystalType crystalType;
+
+    [Header("Parameters")]
+    [SerializeField][Tooltip("if true OnCollect, else OnInteract")] private bool isCollectable;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float amplitude = 0.2f;
     [SerializeField] private float collectSpeed = 1f;
 
     private Collider manaCollider;
+    private Outline outline;
+
     private float defaultYPos;
     private float timer;
 
-    private Outline outline;
+    private enum CrystalType
+    {
+        health,
+        mana
+    }
 
     private void Start()
     {
@@ -35,7 +46,16 @@ public class ManaCrystal : Interactable
 
     public override void OnInteract()
     {
-        if (manaCollider.enabled)
+        if (manaCollider.enabled && !isCollectable)
+        {
+            manaCollider.enabled = false;
+            StartCoroutine(Collect());
+        }
+    }
+
+    public override void OnCollect()
+    {
+        if (manaCollider.enabled && isCollectable)
         {
             manaCollider.enabled = false;
             StartCoroutine(Collect());
@@ -68,6 +88,19 @@ public class ManaCrystal : Interactable
             collectSpeed += collectSpeed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, player.position + Vector3.up, collectSpeed * Time.deltaTime);
             yield return null;
+        }
+
+        switch (crystalType)
+        {
+            case CrystalType.health:
+                FindObjectOfType<PlayerStats>().OnHealth(1);
+                break;
+            case CrystalType.mana:
+                FindObjectOfType<PlayerStats>().OnMana(1);
+                break;
+            default:
+                Debug.Log("idi nahuy");
+                break;
         }
 
         Destroy(gameObject);

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthGem : Gem
+public class ManaGem : Gem
 {
-    [SerializeField] private int ammount = 5;
+    //[SerializeField] private int ammount = 1;
 	public override void ChangeStat(PlayerStats playerStats)
 	{
-		playerStats.AddHealth(ammount);
+		//playerStats.AddMana(ammount);
 	}
 }

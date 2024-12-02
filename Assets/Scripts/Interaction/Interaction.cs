@@ -10,12 +10,20 @@ public class Interaction : MonoBehaviour
     [Header("Controls")]
     [SerializeField] private KeyCode interactKey = KeyCode.Mouse0;
 
+    private Transform playerTransform;
+
     private Interactable currentInteractable;
+
+    private void Awake()
+    {
+        playerTransform = FindObjectOfType<PlayerMove>().transform;
+    }
 
     private void Update()
     {
         HandleInteractionCheck();
         HandleInteractionInput();
+        HandleInteractionCollect();
     }
 
     private void HandleInteractionCheck()
@@ -41,6 +49,19 @@ public class Interaction : MonoBehaviour
         {
             currentInteractable.OnLoseFocus();
             currentInteractable = null;
+        }
+    }
+
+    private void HandleInteractionCollect()
+    {
+        Collider[] collectableInRange = Physics.OverlapSphere(playerTransform.position, 1, interactionLayer);
+
+        foreach (var collectableCollider in collectableInRange)
+        {
+            if (collectableCollider.TryGetComponent<Interactable>(out Interactable collectableObject))
+            {
+                collectableObject.OnCollect();
+            }
         }
     }
 
