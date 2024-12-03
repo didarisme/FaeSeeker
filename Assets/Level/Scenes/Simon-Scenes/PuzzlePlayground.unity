@@ -17959,6 +17959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToActivate: {fileID: 1216648332}
+  audioToStop: {fileID: 201696487}
 --- !u!4 &1345466162 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5282735307534919270, guid: 131ed1e5cc4078f46a50aeca7508c5e7, type: 3}
@@ -23522,6 +23523,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3119839508993764603, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -8.0000305
+      objectReference: {fileID: 0}
     - target: {fileID: 3621874202099277342, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
       propertyPath: m_Name
       value: PlayerPack
@@ -23529,6 +23534,46 @@ PrefabInstance:
     - target: {fileID: 4816833230054940050, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301586554132137768, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.058
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301586554132137768, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.151
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301586554132137768, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.081
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301586554132137768, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.034614988
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301586554132137768, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.13885826
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301586554132137768, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.988572
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301586554132137768, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.047389217
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301586554132137768, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 5.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301586554132137768, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -183.186
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301586554132137768, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 15.826
       objectReference: {fileID: 0}
     - target: {fileID: 5460460848732379386, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
       propertyPath: currentForm
@@ -23546,6 +23591,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -22
       objectReference: {fileID: 0}
+    - target: {fileID: 5963466087117436398, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7317958
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963466087117436398, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.681524
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963466087117436398, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 85.926
+      objectReference: {fileID: 0}
     - target: {fileID: 6182284100291059899, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
       propertyPath: m_LocalPosition.x
       value: -66
@@ -23557,6 +23614,10 @@ PrefabInstance:
     - target: {fileID: 6182284100291059899, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
       propertyPath: m_LocalPosition.z
       value: -22
+      objectReference: {fileID: 0}
+    - target: {fileID: 9022171492184455574, guid: 5040546dcdaf540e1b23b6a90e4a1385, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -8.0000305
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

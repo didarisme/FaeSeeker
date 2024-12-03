@@ -3,6 +3,7 @@ using UnityEngine;
 public class TriggerActivator : MonoBehaviour
 {
     [SerializeField] private GameObject objectToActivate;
+    [SerializeField] private AudioSource audioToStop;
 
     private AudioSource audioSource;
 
@@ -13,9 +14,13 @@ public class TriggerActivator : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Time.timeScale = 0f;
-        objectToActivate.SetActive(true);
-        audioSource.ignoreListenerPause = true;
-        audioSource.Play();
+        if(other.CompareTag("Player")){
+            if(audioToStop!=null) audioToStop.Stop();
+            Time.timeScale = 0f;
+            objectToActivate.SetActive(true);
+            audioSource.ignoreListenerPause = true;
+            audioSource.Play();
+        }
+        
     }
 }
